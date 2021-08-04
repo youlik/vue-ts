@@ -1,5 +1,14 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import './assets/css/global.scss'
-createApp(App).use(router).mount("#app");
+import store from './store'
+import installMaxerStore , {Maxer} from './store/maxer.mixin'
+
+declare module '@vue/runtime-core' {
+    interface ComponentCustomProperties  {
+        $m:Maxer
+    }
+}
+const app = createApp(App)
+installMaxerStore(app)
+app.use(router).mount("#app");
