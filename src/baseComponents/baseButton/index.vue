@@ -1,11 +1,11 @@
 <template>
-    <div class="base-button-container" :class="type" @click="click">
+    <div class="base-button-container" :style="styleObj" :class="[className,isbeat?'beat': '']" @click="click">
         {{label}}
     </div>
 </template>
   
   <script lang="ts">
-  import { defineComponent } from "vue";
+  import { computed, defineComponent, reactive, ref, toRef } from "vue";
   
       export default defineComponent({
           name:'baseButton',
@@ -13,12 +13,19 @@
           props:{
               label:String,
               type:String,
+              isbeat:Boolean,
+              align:{
+                  type:String,
+                  default:'center'
+                }
           },
           setup(props,{emit}){
+              let className = toRef(props,'type')
+              const styleObj = reactive({'text-algin':props.type})
               function click(){
                     emit('click')
               }
-              return {click}
+              return {click,className,styleObj}
           }
   
       })
@@ -33,14 +40,26 @@
           border-radius: 6px;
           cursor: pointer;
       }
-
-      .primary{
-          background-color: $blue-1;
-          &:hover{
+      .beat{
+        &:hover{
             animation:gelation 0.5s 1
           }
       }
+      .primary{
+          background-color: #1abc9c;
+      }
+      
+      .warning{
+        background-color: #f1c40f;
+      }
 
+      .danger{
+        background-color: #e74c3c;
+      }
+
+      .success{
+          background-color: #2ecc71;
+      }
       @keyframes gelation {
           from, to {
               transform:scale(1,1)

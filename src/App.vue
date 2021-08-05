@@ -1,5 +1,4 @@
 <template>
-  <slider></slider>
   <router-view />
 </template>
 <script lang="ts">
@@ -7,7 +6,14 @@ import { defineComponent } from 'vue'
 import slider from './views/slider.vue'
 export default defineComponent({
   components:{
-    slider
+  },
+  setup(){
+    let theme = localStorage.getItem('theme')
+    if(!theme || theme === 'dark'){
+      window.document.documentElement.setAttribute('data-theme', 'dark')
+    }else{
+      window.document.documentElement.setAttribute('data-theme', 'bright')
+    }
   }
 })
 </script>

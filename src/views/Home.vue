@@ -1,11 +1,13 @@
 <template>
   <view-container>
     <template v-slot:tool>
-      <base-button type="primary" label="换色"></base-button>
+      <base-button type="primary" @click="replaceTheme" label="换色"></base-button>
     </template>
     <div style="padding:10px">
         <div class="top-container">
+          <div class="img-container">
           <img src="../assets/blue.png">
+          </div>
           <div class="tool-container">
                 <div class="tool-item-container" v-for="(item,index) in menuList" :key="index">{{item.name}}</div>
           </div>
@@ -25,9 +27,15 @@ export default defineComponent({
     BaseButton
   },
   setup(){
-    const menuList = reactive([{name:'菜鸟',url:''},{name:'掘金',url:''},{name:'csdn',url:''},{name:'思否',url:''}])
-    return {
-      menuList
+    const menuList: Array<any> = reactive([{name:'菜鸟',url:''},{name:'掘金',url:''},{name:'csdn',url:''},{name:'思否',url:''}])
+    let replaceTheme = function(){
+      console.log("触发");
+      
+      window.document.documentElement.setAttribute('data-theme', 'light')
+    }
+      return {
+      menuList,
+      replaceTheme
     }
   }
 });
@@ -54,6 +62,31 @@ export default defineComponent({
 .tool-item-container{
   width: 60px;
   height: 60px;
+}
+.img-container{
+  height: 163px;
+  width: 218px;
+  position: relative;
+  &::before,&::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid rgb(17, 36, 100);
+    transition: all .5s;
+    animation: clippath 4s infinite linear;
+  }
+  @keyframes clippath {
+      0%, 100% { clip-path: inset(0 0 95% 0); }
+      25% { clip-path: inset(0 95% 0 0); }
+      50% { clip-path: inset(95% 0 0 0); }
+      75% { clip-path: inset(0 0 0 95%); }
+  }
+  &::after{
+    animation-delay: -2s;
+  }
 }
 </style>
 

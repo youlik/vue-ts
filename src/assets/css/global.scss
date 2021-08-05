@@ -26,3 +26,38 @@ $blue-3:#3c6382;
 $blue-4:#0a3d62;
 
 $green-1:#AFEEEE;	
+
+
+$themes:(
+    light:(
+        // 字体
+        font_color1:#333333,
+
+        // 页脚字体颜色
+        footer_color1:#99b5b0,
+
+        // 侧边栏背景色
+        slider_color1:#82ccdd,
+
+        // 整体背景色
+        background_color1:#CCCCCC
+        
+
+    ),
+    dark:(
+                // 字体
+                font_color1:#ffffff,
+
+                // 页脚字体颜色
+                footer_color1:#cccccc,
+        
+                // 侧边栏背景色
+                slider_color1:#669999,
+        
+                // 整体背景色
+                background_color1:#ccffcc
+    ),
+    man:(
+
+    )
+)
