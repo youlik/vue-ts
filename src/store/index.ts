@@ -1,11 +1,12 @@
 import {createStore} from 'vuex'
-export default createStore({
-    state:{
-        showSlider:false
-    },
-    mutations:{
-        $changeStore(state:any,payload:any) {
-            state[payload.name] = payload.value
-        }
-    }
-})
+import modules from './modules'
+import { userState } from './modules/user'
+import { toolState } from './modules/tool'
+
+export interface State{
+    user:userState;
+    tool:toolState;
+}
+// export default createStore< State >{
+//     modules
+// }
