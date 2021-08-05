@@ -24,7 +24,7 @@ export default defineComponent({
   setup(){
       const router = useRouter()
       function login(params:any) {
-          router.push({name:'Layout'})
+          router.push({path:'/layout/home'})
       }
       return {
           login

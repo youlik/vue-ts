@@ -1,32 +1,44 @@
 <template>
-    <div class="base-input-container">
+    <div class="base-input-container" :style="{margin:margin}" :class="{ishover:ishover}"  >
         <span class="label-container">{{label}}</span>
-        <input v-model="currentValue" :type="type" class="input-container">
+        <input v-model="currentValue" @focus="ishover = true" @blur="ishover = false" :type="type" class="input-container">
     </div>
 </template>
   
   <script lang="ts">
-  import { computed, defineComponent, reactive, ref, toRef } from "vue";
+  import { computed, defineComponent, reactive, ref, toRef,watch } from "vue";
   
       export default defineComponent({
           name:'baseButton',
           components:{},
           props:{
               label:String,
-              type:String
+              type:String,
+              margin:{
+                  type:String,
+                  default:"5px"
+              }
           },
           setup(props,{emit}){
-              let currentValue = ref()
-              return {currentValue}
+              let currentValue = ref('')
+              let ishover = ref(false)
+              let timeId = 0
+              watch( currentValue,(newValue,oldValue)=>{
+                clearTimeout(timeId)
+                timeId = setTimeout(()=>{
+                    emit('value',newValue)
+                },1000)
+              })
+              return {currentValue,timeId,ishover}
           }
   
       })
   </script>
   
   <style lang="scss" scoped>
-      .base-input-container{
-          height: 40px;
-          width: 396px;
+.base-input-container{
+  height: 40px;
+  width: 396px;
           line-height: 40px;
           color:#121313;
           background-color: #ffffff;
@@ -46,7 +58,9 @@
           outline: none;
           flex:1
       }
-
+        .ishover{
+            border: 1px solid $blue-1;
+        }
       .label-container{
           padding: 0 10px;
       }
