@@ -1,7 +1,7 @@
 <template>
     <div class="base-input-container" :style="{margin:margin}" :class="{ishover:ishover}"  >
         <span class="label-container">{{label}}</span>
-        <input v-model="currentValue" @focus="ishover = true" @blur="ishover = false" :type="type" class="input-container">
+        <input v-model="currentValue" @focus="ishover = true" @blur="ishover = false;$emit('blur')" :type="type" class="input-container">
     </div>
 </template>
   
