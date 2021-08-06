@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
+import '@/permission'
 // import store from './store'
 // import installMaxerStore , {Maxer} from './store/maxer.mixin'
 
