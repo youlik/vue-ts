@@ -3,7 +3,7 @@
     <template v-slot:tool>
       <base-button type="primary" @click="replaceTheme" label="换色"></base-button>
     </template>
-    <div style="padding:10px">
+    <div style="padding:30px">
         <div class="top-container">
           <div class="img-container">
           <img src="../assets/blue.png">
@@ -12,6 +12,12 @@
                 <div class="tool-item-container" v-for="(item,index) in menuList" :key="index">{{item.name}}</div>
           </div>
         </div>
+        <div class="content-container">
+            <div class="card-container">
+                <div style="text-align:left">留言板</div>
+                <span class="split-class"></span>
+            </div>
+        </div>  
     </div>
   </view-container>
 </template>
@@ -29,7 +35,6 @@ export default defineComponent({
   setup(){
     const menuList: Array<any> = reactive([{name:'菜鸟',url:''},{name:'掘金',url:''},{name:'csdn',url:''},{name:'思否',url:''}])
     let replaceTheme = function(){
-      console.log("触发");
       
       window.document.documentElement.setAttribute('data-theme', 'light')
     }
@@ -59,6 +64,17 @@ export default defineComponent({
   grid-template-columns: repeat(4, 1fr);
 }
 
+.card-container{
+  width: 400px;
+  height: 500px;
+  border: 1px solid gray;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.content-container{
+  margin-top: 20px;
+}
 .tool-item-container{
   width: 60px;
   height: 60px;
@@ -87,6 +103,13 @@ export default defineComponent({
   &::after{
     animation-delay: -2s;
   }
+}
+
+.split-class{
+  height: 2px;
+  width:100%;
+  display: block;
+  background-color: darkturquoise;
 }
 </style>
 

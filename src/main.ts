@@ -2,6 +2,12 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import '@/permission'
+import axios from 'axios'
+
+
+// import Prism from 'hl';
+
+
 // import store from './store'
 // import installMaxerStore , {Maxer} from './store/maxer.mixin'
 
@@ -10,6 +16,8 @@ import '@/permission'
 //         $m:Maxer
 //     }
 // }
+axios.defaults.withCredentials = true
+axios.defaults.baseURL =  "/api"
 const app = createApp(App)
 // installMaxerStore(app)
 app.use(router).mount("#app");

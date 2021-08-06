@@ -13,7 +13,7 @@
           name:'viewContainer',
           components:{},
           setup(){
-              const list = reactive([{name:"首页",url:'home'},{name:"组件",url:'myComponents'},{name:"留言",url:''}])
+              const list = reactive([{name:"首页",url:'home'},{name:"组件",url:'myComponents'},{name:"留言",url:''},{name:"博客",url:'blog'}])
               let currentIndex = ref(0)
               const route = useRouter();
               function routerTo(url:string){

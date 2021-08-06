@@ -12,15 +12,16 @@
           <base-input label="用户名"></base-input>
           <base-input label="密码" type="passward" @click="isPassword = true" @blur="isPassword = false"></base-input>
           <div style="display:flex">
-              <baseButton type="primary" label="注册"></baseButton>
+              <baseButton type="primary" label="注册" @click="register"></baseButton>
               <baseButton type="success" label="登录" @click="login" style="margin-left:15px"></baseButton>
           </div>
       </div>
   </div>
 </template>
   <script lang="ts">
-import { defineComponent,ref } from "vue";
+import { defineComponent,ref,getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
+import axios from "axios";
 import BaseInput from "@/baseComponents/baseInput/index.vue";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
 export default defineComponent({
@@ -31,13 +32,22 @@ export default defineComponent({
   },
   setup(){
       const router = useRouter()
+
       function login(params:any) {
-          router.push({path:'/layout/home'})
+          axios.post('/login',{username:'admin',password:'123456'}).then(res=>{
+            router.push({path:'/layout/home'})
+          })
+      }
+
+      function register(params:any) {
+        axios.post('/user/addUser',{username:'admin',password:'123456'}).then(res=>{
+            // router.push({path:'/layout/home'})
+          })
       }
       let isPassword = ref(false)
       console.log(isPassword.value)
       return {
-          login,isPassword
+          login,isPassword,register
       }
   }
 });

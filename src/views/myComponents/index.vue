@@ -1,11 +1,14 @@
 <template>
     <ViewContainer>
         <div>
-            <base-button label="success" type="success"></base-button>
-            <base-button label="danger" type="danger"></base-button>
-            <base-button label="warning" type="warning"></base-button>
-            <base-button label="primary" type="primary"></base-button>
-            <base-button label="beat" type="success" isbeat></base-button>
+            <section style="display:flex">
+              <base-button label="success" type="success"></base-button>
+              <base-button label="danger" type="danger"></base-button>
+              <base-button label="warning" type="warning"></base-button>
+              <base-button label="primary" type="primary"></base-button>
+              <base-button label="beat" type="success" isbeat></base-button>
+            </section>
+
         </div>
     </ViewContainer>
 </template>
