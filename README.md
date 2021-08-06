@@ -1,24 +1,11 @@
 # vue-ts
 
-## Project setup
-```
-npm install
-```
+技术栈vue3.0 + ts
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+##功能点
 
-### Compiles and minifies for production
-```
-npm run build
-```
+登录
+首页
+留言
+组件化展示
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
