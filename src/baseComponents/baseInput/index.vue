@@ -29,6 +29,7 @@
                     emit('value',newValue)
                 },1000)
               })
+              
               return {currentValue,timeId,ishover}
           }
   

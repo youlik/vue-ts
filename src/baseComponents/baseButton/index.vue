@@ -39,6 +39,7 @@
           color:#ffffff;
           border-radius: 6px;
           cursor: pointer;
+          margin: 5px;
       }
       .beat{
         &:hover{

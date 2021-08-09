@@ -1,9 +1,6 @@
 <template>
     <ViewContainer :list="containerData">
-        <md-editor v-model="content" height="857px"></md-editor>
-        <template v-slot:tool>
-          <BaseButton label="提交" type="primary" @click="addBlog" ></BaseButton>
-        </template>
+        <md-editor v-model="content" height="857px" previewOnly></md-editor>
     </ViewContainer>
 </template>
   
@@ -12,22 +9,27 @@
 import 'md-editor-v3/lib/style.css';
 import ViewContainer,{containerProps} from "@/baseComponents/viewContainer/index.vue";
 import MdEditor from 'md-editor-v3'
+import axios from "axios";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
   export default defineComponent({
-    name: "Home",
+    name: "blogDetails",
     components: {
         ViewContainer,
         MdEditor,
-        BaseButton
     },
     setup(){
         let content = ref('')
-        function addBlog(params:any) {
-          console.log("1")
+        let title = ref('')
+        function getList() {
+            axios.get('/list/getBlogList').then(res=>{
+                content.value = res.data.data[0].content
+                title.value =res.data.data[0].value
+            })
         }
-        const containerData:containerProps = {title:'添加博客',showToolBar:true}
+        getList()
+        const containerData:containerProps = {title:title.value,showToolBar:false}
         return {
-            content,addBlog,containerData
+            content,containerData
       }
     }
   });

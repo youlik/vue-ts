@@ -1,5 +1,5 @@
 <template>
-  <view-container>
+  <view-container :list="containerData">
     <template v-slot:tool>
       <base-button type="primary" @click="replaceTheme" label="换色"></base-button>
     </template>
@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent,reactive } from "vue";
-import viewContainer from "../baseComponents/viewContainer/index.vue"
+import viewContainer,{containerProps} from "../baseComponents/viewContainer/index.vue"
 import BaseButton from "@/baseComponents/baseButton/index.vue";
 export default defineComponent({
   name: "Home",
@@ -38,9 +38,11 @@ export default defineComponent({
       
       window.document.documentElement.setAttribute('data-theme', 'light')
     }
+    const containerData: containerProps = {title:'首页',showToolBar:true}
       return {
       menuList,
-      replaceTheme
+      replaceTheme,
+      containerData
     }
   }
 });

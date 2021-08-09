@@ -1,9 +1,9 @@
 <template>
   <div class="view-container">
       <div class="tool-bar-container">
-          <div style="width:50%;line-height:40px;text-align:left;padding:0 5px">标题</div>
+          <div style="width:50%;line-height:50px;text-align:left;padding:0 5px">{{list.title}}</div>
           <div style="width:50%;display:flex;align-items:center;justify-content: flex-end;padding-right:5px">
-            <slot name="tool"></slot>
+            <slot name="tool" v-if="list.showToolBar"></slot>
           </div>
       </div>
       <div class="content-container">
@@ -13,14 +13,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-
+import { defineComponent,PropType } from "vue";
+    // 定义所需参数的接口
+    export interface containerProps {
+        title: string;
+        showToolBar: boolean;
+    }
     export default defineComponent({
         name:'viewContainer',
         components:{},
         props:{
-            title:String,
-            showToolBar:Boolean
+            // 用list来接受参数
+            list:{
+                type:Object as PropType<containerProps>,
+                required:true
+            }
         },
 
     })
