@@ -12,6 +12,7 @@
 import 'md-editor-v3/lib/style.css';
 import ViewContainer,{containerProps} from "@/baseComponents/viewContainer/index.vue";
 import MdEditor from 'md-editor-v3'
+import axios from "axios";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
   export default defineComponent({
     name: "Home",
@@ -23,7 +24,7 @@ import BaseButton from "@/baseComponents/baseButton/index.vue";
     setup(){
         let content = ref('')
         function addBlog(params:any) {
-          console.log("1")
+          axios.post('/list/addBlog')
         }
         const containerData:containerProps = {title:'添加博客',showToolBar:true}
         return {
