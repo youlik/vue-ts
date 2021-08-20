@@ -1,9 +1,9 @@
 <template>
   <view-container :list="containerData">
     <template v-slot:tool>
-      <base-button type="primary" @click="replaceTheme" label="换色"></base-button>
+          <base-button type="primary" label="换色" @click="showDialog = true"></base-button>
     </template>
-    <div style="padding:30px">
+    <div style="padding:30px" id="div1">
         <div class="top-container">
           <div class="img-container">
           <img src="../assets/blue.png">
@@ -19,11 +19,14 @@
             </div>
         </div>  
     </div>
+    <div class="mark-container" v-show="showDialog">
+        <div class="mark-item-container" @click="replaceTheme">猛男粉</div>
+    </div>
   </view-container>
 </template>
 
 <script lang="ts">
-import { defineComponent,reactive } from "vue";
+import { defineComponent,reactive,ref,onMounted} from "vue";
 import viewContainer,{containerProps} from "../baseComponents/viewContainer/index.vue"
 import BaseButton from "@/baseComponents/baseButton/index.vue";
 export default defineComponent({
@@ -34,14 +37,23 @@ export default defineComponent({
   },
   setup(){
     const menuList: Array<any> = reactive([{name:'菜鸟',url:''},{name:'掘金',url:''},{name:'csdn',url:''},{name:'思否',url:''}])
+    let showDialog = ref(false)
     let replaceTheme = function(){
-      
       window.document.documentElement.setAttribute('data-theme', 'light')
+      showDialog.value = false
     }
+    function getDom() {
+      console.log(document.getElementById('div1'))
+    }
+    onMounted(()=>{
+      getDom()
+    })
+    getDom()
     const containerData: containerProps = {title:'首页',showToolBar:true}
       return {
       menuList,
       replaceTheme,
+      showDialog,
       containerData
     }
   }
@@ -112,6 +124,29 @@ export default defineComponent({
   width:100%;
   display: block;
   background-color: darkturquoise;
+}
+
+.mark-container{
+  z-index: 2000;
+  width: 150px;
+  height: 100px;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background-color: #DCDCDC;
+  border-radius: 15px;
+  display: flex;
+}
+
+.mark-item-container{
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  text-align: center;
+  border: 1px solid lightblue;
+  background-color: lightcyan;
+  border-radius: 15px;
+  cursor: pointer;
 }
 </style>
 

@@ -3,8 +3,7 @@
         <template v-slot:tool>
           <BaseButton label="添加" type="primary" @click="addBlog" ></BaseButton>
         </template>
-        <div>
-            
+        <div class="content-container">
             <blog-card :list="item" v-for="(item,index) in cardList" @click="routerTo" :key="index"></blog-card>
         </div>
     </ViewContainer>
@@ -38,7 +37,6 @@ import { useRouter } from "vue-router";
         }
         function getList() {
             axios.get('/list/getBlogList').then(res=>{
-                console.log(res);
                 cardList.value = res.data.data
                 cardList.value.forEach(item=>{
                     item = Object.assign({},item,{label:'555'})
@@ -55,8 +53,23 @@ import { useRouter } from "vue-router";
   });
   </script>
   
-  <style lang="scss">
-      
+  <style lang="scss" scoped>
+      .content-container{
+        height: 100%;
+        overflow-y: auto;
+        padding: 10px;
+        box-sizing: border-box;
+        &::-webkit-scrollbar-track-piece {
+          background: #d3dce6;
+        }
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #99a9bf;
+          border-radius: 20px;
+        }
+      }
   </style>
   
   

@@ -1,7 +1,7 @@
 <template>
     <div class="blog-card-container">
-        <div>
-            {{list.label}}|{{list.time}}
+        <div class="text-title">
+            时间：{{list.update_time}}
         </div>
         <span class="text-highlight">{{list.title}}</span>
         <span>{{content}}</span>
@@ -14,7 +14,7 @@ export interface blogCardProps {
       title: string,
       content:string,
       label:string,
-      time:string,
+      update_time:string,
   }
     export default defineComponent({
         name:'viewContainer',
@@ -47,6 +47,12 @@ export interface blogCardProps {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        border-bottom: 1px solid #e5e6eb;
+    }
+
+    .text-title{
+        line-height: 22px;
+        margin-bottom: 8px;
     }
 
     .text-highlight{
@@ -55,6 +61,7 @@ export interface blogCardProps {
         line-height: 24px;
         color: #1d2129;
         text-align: left;
+        margin-bottom: 8px;
     }
   </style>
   

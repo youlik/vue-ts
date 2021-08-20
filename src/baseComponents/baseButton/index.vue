@@ -23,6 +23,7 @@
               let className = toRef(props,'type')
               const styleObj = reactive({'text-algin':props.type})
               function click(){
+                  console.log("----------")
                     emit('click')
               }
               return {click,className,styleObj}
