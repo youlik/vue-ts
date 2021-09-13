@@ -1,5 +1,5 @@
 <template>
-    <div class="base-button-container" :style="styleObj" :class="[className,isbeat?'beat': '']" @click="click">
+    <div class="base-button-container" :style="styleObj" :class="[className,isbeat?'beat': '']" @click="$emit('click')">
         {{label}}
     </div>
 </template>
@@ -10,6 +10,7 @@
       export default defineComponent({
           name:'baseButton',
           components:{},
+          emits:['click'],
           props:{
               label:String,
               type:String,
@@ -22,11 +23,7 @@
           setup(props,{emit}){
               let className = toRef(props,'type')
               const styleObj = reactive({'text-algin':props.type})
-              function click(){
-                  console.log("----------")
-                    emit('click')
-              }
-              return {click,className,styleObj}
+              return {className,styleObj}
           }
   
       })
@@ -49,6 +46,9 @@
       }
       .primary{
           background-color: #1abc9c;
+          &:focus{
+              opacity: 0.8;
+          }
       }
       
       .warning{

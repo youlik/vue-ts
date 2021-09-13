@@ -57,5 +57,6 @@ import { defineComponent,PropType } from "vue";
         box-sizing: border-box;
         border-radius: 5px;
         background-color: #ffffff;
+        position: relative;
     }
 </style>
