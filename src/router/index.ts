@@ -1,68 +1,76 @@
-import { createRouter, createWebHistory,createWebHashHistory, RouteRecordRaw } from "vue-router";
-import Home from "../views/Home.vue";
+import { createRouter, createWebHistory, createWebHashHistory, RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "login",
-    component: () => import("../views/login.vue"),
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/layout.vue"),
+    redirect: '/home',
+    children: [{
+      path: "home",
+      name: 'Home',
+      meta: { title: '首页' },
+      component: () => import("../views/Home.vue")
+    }]
   },
   {
-    path: "/layout",
-    name: "Layout",
+    path: "/components",
     component: () =>
-    import(/* webpackChunkName: "about" */ "../views/layout.vue"),
-    children:[
+      import(/* webpackChunkName: "about" */ "../views/layout.vue"),
+    redirect: '/components/index',
+    children: [
       {
-        path:"home",
-        name:'Home',
-        component:()=>import("../views/Home.vue")
-      },
-      {
-        path:"myComponents",
-        name:'MyComponents',
-        component:()=>import("../views/myComponents/index.vue")
-      },
-      {
-        path:"blog",
-        name:'Blog',
-        component:()=>import("../views/blog/index.vue")
-      },
-      {
-        path:"addBlog",
-        name:'AddBlog',
-        component:()=>import("../views/blog/addBlog.vue")
-      },
-      {
-        path:"blogDetails",
-        name:'BlogDetails',
-        component:()=>import("../views/blog/detail.vue")
-      },
-      {
-        path:"message",
-        name:'message',
-        component:()=>import("../views/message/index.vue")
-      },
+        path: "index",
+        name: 'components',
+        meta: { title: '组件' },
+        component: () => import("../views/myComponents/index.vue")
+      }
     ]
-},
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/myComponents",
-    name: "myComponents",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/blog",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/myComponents/index.vue"),
+      import(/* webpackChunkName: "about" */ "../views/layout.vue"),
+    redirect: '/blog/index',
+    children: [{
+      path: "index",
+      name: 'blog',
+      meta: { title: '博客' },
+      component: () => import("../views/blog/index.vue")
+    }, {
+      path: "addBlog",
+      name: 'AddBlog',
+      meta: { title: '添加博客', hidden: true, },
+      component: () => import("../views/blog/addBlog.vue")
+    },
+    {
+      path: "blogDetails",
+      name: 'BlogDetails',
+      meta: { title: '文章详情', hidden: true, },
+      component: () => import("../views/blog/detail.vue")
+    },
+    ]
   },
+  {
+    path: "/message",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/layout.vue"),
+    redirect: '/message/index',
+    children: [
+      {
+        path: "index",
+        name: 'message',
+        meta: { title: '留言' },
+        component: () => import("../views/message/index.vue")
+      }
+    ]
+  },
+  {
+    path: "/login",
+    name: "login",
+    meta: { hidden: true },
+    component: () => import("../views/login.vue"),
+  }
 ];
 
 const router = createRouter({

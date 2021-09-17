@@ -1,0 +1,8 @@
+@import "../assets/css/handle";
+.el-menu-item{
+    @include background_color("background_color1");
+}
+.el-menu::after, .el-menu::before {
+    display: none;
+    content: "";
+}

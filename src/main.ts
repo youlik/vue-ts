@@ -7,6 +7,7 @@ import {axiosPlugin} from './plugin/axios'
 import elementPlus from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
 import 'lib-flexible/flexible'
+import '@/styles/element-ui.scss'
 // import Prism from 'hl';
 
 
