@@ -31,7 +31,7 @@
 </template>
 
   <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, reactive, ref , onMounted} from "vue";
 import { useRouter } from "vue-router";
 import routerObj from "../router/index";
 export interface sliderItemProps {
@@ -48,9 +48,8 @@ export default defineComponent({
       { name: "留言", url: "message" },
       { name: "博客", url: "blog" },
     ]); 
-    let activeIndex = ref(0);
+    let activeIndex = ref('/');
     function handlePath(parent:string,path:string) {
-      console.log(parent,path)
       if(path === 'home'){
         return '/'
       }else{
@@ -58,12 +57,18 @@ export default defineComponent({
       }
     }
     const route = useRouter();
-    console.log(routerObj);
     let routeList = routerObj.options.routes;
     function routerTo(url: string) {
       route.push({ path: url });
     }
-   
+    onMounted(()=>{
+      if(window.location.href.split('/')[4] !== 'home'){
+        activeIndex.value = `/${window.location.href.split('/')[4]}/${window.location.href.split('/')[5]}`
+      }else{
+        return '/'
+      }
+      console.log(window.location.href)
+    })
     return { activeIndex, routeList, handlePath };
   }, 
 });

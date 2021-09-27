@@ -3,21 +3,8 @@
     <template v-slot:tool>
           <base-button type="primary" label="换色" @click="showDialog = true"></base-button>
     </template>
-    <div style="padding:30px" id="div1">
-        <div class="top-container">
-          <div class="img-container">
-          <img src="../assets/blue.png">
-          </div>
-          <div class="tool-container">
-                <div class="tool-item-container" v-for="(item,index) in menuList" :key="index">{{item.name}}</div>
-          </div>
-        </div>
-        <div class="content-container">
-            <div class="card-container">
-                <div style="text-align:left">留言板</div>
-                <span class="split-class"></span>
-            </div>
-        </div>  
+    <div style="padding:30px">
+
     </div>
     <div class="mark-container" v-show="showDialog">
         <div class="mark-item-container" @click="replaceTheme">猛男粉</div>
@@ -42,13 +29,6 @@ export default defineComponent({
       window.document.documentElement.setAttribute('data-theme', 'light')
       showDialog.value = false
     }
-    function getDom() {
-      console.log(document.getElementById('div1'))
-    }
-    onMounted(()=>{
-      getDom()
-    })
-    getDom()
     const containerData: containerProps = {title:'首页',showToolBar:true}
       return {
       menuList,
