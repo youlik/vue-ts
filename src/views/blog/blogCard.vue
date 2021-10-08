@@ -5,6 +5,7 @@
         </div>
         <span class="text-highlight">{{list.title}}</span>
         <span>{{content}}</span>
+        <div class="label-container">未分类</div>
     </div>
 </template>
   
@@ -26,11 +27,20 @@ export interface blogCardProps {
                 required:true
             }
         },
+
         setup(props){
             const content = computed(()=>{
-                let contentData = props.list.content
+                let contentData = getSimpleText(props.list.content) 
+                console.log(contentData)
                 return contentData.slice(0,20)
             })
+
+            function getSimpleText(html:any){
+            var re1 = new RegExp("<.+?>","g");//匹配html标签的正则表达式，"g"是搜索匹配多个符合的内容
+            var msg = html.replace(re1,'');//执行替换成空字符
+            return msg;
+            }
+            
             return {
                 content
             }
@@ -48,6 +58,7 @@ export interface blogCardProps {
         flex-direction: column;
         align-items: flex-start;
         border-bottom: 1px solid #e5e6eb;
+        position: relative;
     }
 
     .text-title{
@@ -62,6 +73,20 @@ export interface blogCardProps {
         color: #1d2129;
         text-align: left;
         margin-bottom: 8px;
+    }
+
+    .label-container{
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            border: 1px solid #c9cdd4;
+            box-sizing: border-box;
+            border-radius: 2px;
+            line-height: 18px;
+            text-align: center;
+            color: #c9cdd4;
+            font-size: 13px;
+            padding: 3px;
     }
   </style>
   
