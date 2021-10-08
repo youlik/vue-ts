@@ -60,7 +60,7 @@ const service = axios.create({
   },
   // 是否跨站点访问控制请求
   withCredentials: true,
-  timeout: 30000,
+  timeout: 60000,
   transformRequest: [(data) => {
     data = JSON.stringify(data)
     return data
@@ -81,7 +81,7 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use((config: AxiosRequestConfig) => {
   //获取token，并将其添加至请求头中
-  let token = localStorage.getItem('token')
+  const token = localStorage.getItem('token')
   if(token){
     config.headers.Authorization = `${token}`;
   }

@@ -1,5 +1,5 @@
 import { AxiosPromise, AxiosResponse } from "axios";
-import { Interceptors } from "./interceptor";
+import { Interceptors } from "../../src/api/interceptor";
 
 // 请求配置
 export class HttpServer {

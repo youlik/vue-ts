@@ -1,4 +1,4 @@
-import Axios from "axios";
+import request from "./http";
 // 接口响应通过格式
 export interface HttpResponse {
     status: number
@@ -14,9 +14,37 @@ interface LoginParams{
     password:string
 }
 
-export class UserService{
-    
-    static async login(params:LoginParams):Promise<HttpResponse> {
-        return Axios('')
-    }
+
+export const login=(params:LoginParams)=>{
+     return request({
+        url:"/login",
+        method:'get',
+        params
+      })
+}
+
+export const getBlogList=(params:any)=>{
+  return request({
+    url:"/list/getBlogList",
+    method:'get',
+    params
+  })
+}
+
+export const addMessage = (params:any)=>{
+  return request({
+    url:"/list/addMessage",
+    method:'post',
+    data:params
+  })
+}
+
+
+export const getMessageList = (params:any)=>{
+  console.log(params)
+  return request({
+    url:"/list/getMessage",
+    method:'get',
+    params:params
+  })
 }

@@ -13,6 +13,7 @@
 import { defineComponent,reactive,ref } from "vue";
 import ViewContainer,{containerProps} from "@/baseComponents/viewContainer/index.vue";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
+import { getBlogList } from "@/api/https_data";
 import BlogCard from "./blogCard.vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
@@ -35,16 +36,15 @@ import { useRouter } from "vue-router";
         function routerTo(){
           route.push('blogDetails')
         }
-        function getList() {
-            axios.get('/list/getBlogList').then(res=>{
-                cardList.value = res.data.data
-                cardList.value.forEach(item=>{
+       
+        getBlogList({}).then(res=>{
+          console.log(res)
+          cardList.value = res.data.data
+          cardList.value.forEach(item=>{
                     item = Object.assign({},item,{label:'555'})
                     
                 })
-            })
-        }
-        getList()
+        })
 
         return {
             content,addBlog,cardData,containerData,cardList,routerTo
