@@ -4,7 +4,7 @@
             时间：{{list.update_time}}
         </div>
         <span class="text-highlight">{{list.title}}</span>
-        <span>{{content}}</span>
+        <!-- <span>{{content}}</span> -->
         <div class="label-container">未分类</div>
     </div>
 </template>

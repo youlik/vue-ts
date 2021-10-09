@@ -1,10 +1,17 @@
+const path = require('path')
+
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
 module.exports = {
   publicPath: './',
   outputDir:'dist',
-  resolve:{
-    extensions:['.js','.vue','.json'],
-    alias:{
-      '@':resolve('src')
+  configureWebpack:{
+    resolve:{
+      extensions:['.js','.vue','.json'],
+      alias:{
+        '@':resolve('src')
+      }
     }
   },
   css: {

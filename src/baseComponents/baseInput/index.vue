@@ -9,7 +9,7 @@
   import { computed, defineComponent, reactive, ref, toRef,watch } from "vue";
   
       export default defineComponent({
-          name:'baseButton',
+          name:'baseInput',
           components:{},
           props:{
               label:String,
@@ -26,7 +26,7 @@
               watch( currentValue,(newValue,oldValue)=>{
                 clearTimeout(timeId)
                 timeId = setTimeout(()=>{
-                    emit('value',newValue)
+                    emit('input',newValue)
                 },1000)
               })
               

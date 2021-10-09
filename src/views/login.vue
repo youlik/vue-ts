@@ -9,11 +9,13 @@
         </div>
       </div>
       <div class="login-dialog">
-          <base-input label="用户名"></base-input>
-          <base-input label="密码" type="passward" @click="isPassword = true" @blur="isPassword = false"></base-input>
+          <base-input label="用户名" v-model="username"></base-input>
+          <base-input label="密码" v-model="password" type="passward" @click="isPassword = true" @blur="isPassword = false"></base-input>
+          <base-input label="邮箱" v-if="isRegister"></base-input>
           <div style="display:flex">
               <baseButton type="primary" label="注册" @click="register"></baseButton>
-              <baseButton type="success" label="登录" @click="login" style="margin-left:15px"></baseButton>
+              <baseButton type="success" label="登录" v-if="!isRegister" @click="toLogin" style="margin-left:15px"></baseButton>
+              <baseButton type="success" label="取消" v-else @click="isRegister = false" style="margin-left:15px"></baseButton>
           </div>
       </div>
   </div>
@@ -22,8 +24,10 @@
 import { defineComponent,ref,getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import { login } from "@/api/https_data";
 import BaseInput from "@/baseComponents/baseInput/index.vue";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
+import { ElMessage } from "_element-plus@1.0.2-beta.70@element-plus";
 export default defineComponent({
   name: "login",
   components:{
@@ -32,22 +36,24 @@ export default defineComponent({
   },
   setup(){
       const router = useRouter()
-
-      function login(params:any) {
-          axios.post('/login',{username:'admin',password:'123456'}).then(res=>{
-            router.push({path:'/layout/home'})
-          })
+      const username = ref(''),password = ref('')
+      let isRegister = ref(false)
+      function toLogin(params:any) {
+        login({username:'admin',password:'admin'}).then(res=>{
+          // router.push({path:'/layout/home'})
+        }).catch(err=>{
+          console.log(err)
+          ElMessage.error(`${err.data.description}`)
+        })
       }
 
       function register(params:any) {
-        axios.post('/user/addUser',{username:'admin',password:'123456'}).then(res=>{
-            // router.push({path:'/layout/home'})
-          })
+        isRegister.value = true
       }
       let isPassword = ref(false)
       console.log(isPassword.value)
       return {
-          login,isPassword,register
+          toLogin,isPassword,register,username,password,isRegister
       }
   }
 });

@@ -17,8 +17,8 @@ interface LoginParams{
 
 export const login=(params:LoginParams)=>{
      return request({
-        url:"/login",
-        method:'get',
+        url:"/user/login",
+        method:'post',
         params
       })
 }
