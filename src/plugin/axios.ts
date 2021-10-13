@@ -14,4 +14,4 @@ export const axiosPlugin = {
   },
 };
 
-export default axiosPlugin
+export default axiosPlugin;

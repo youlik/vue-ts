@@ -4,23 +4,31 @@
       <div
         class="message-item-container"
         v-for="(item, index) in list"
-        :key="index" 
+        :key="index"
       >
         <img class="img-container" src="../../assets/portrait1.jpg" />
-        <div style="width: 100%;display:flex;flex-direction: column;">
+        <div style="width: 100%; display: flex; flex-direction: column">
           <div class="title" style="text-align: left">{{ item.name }}</div>
           <div class="content">{{ item.content }}</div>
-          <div style="display:flex;align-items: center;justify-content: space-between"><span>第{{index+1}}楼</span><span>{{ item.time }}</span></div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <span>第{{ index + 1 }}楼</span><span>{{ item.time }}</span>
+          </div>
         </div>
       </div>
     </div>
-    <div style="height:30px">
-       <el-pagination
-          :page-size="pageInfo.size"
-          :pager-count="pageInfo.page"
-          @current-change="changePage"
-          :total="pageInfo.total"
-          ></el-pagination>
+    <div style="height: 30px">
+      <el-pagination
+        :page-size="pageInfo.size"
+        :pager-count="pageInfo.page"
+        @current-change="changePage"
+        :total="pageInfo.total"
+      ></el-pagination>
     </div>
 
     <div class="editor-container">
@@ -31,11 +39,7 @@
         resize="none"
       ></el-input>
       <div style="display: flex; justify-content: flex-end">
-        <base-button
-          label="提交"
-          type="primary"
-          @click="add"
-        ></base-button>
+        <base-button label="提交" type="primary" @click="add"></base-button>
       </div>
     </div>
   </view-container>
@@ -46,7 +50,7 @@ import ViewContainer, {
   containerProps,
 } from "@/baseComponents/viewContainer/index.vue";
 import { reactive, ref } from "_vue@3.1.5@vue";
-import { getMessageList,addMessage } from "@/api/https_data";
+import { getMessageList, addMessage } from "@/api/https_data";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
 
 export default {
@@ -56,24 +60,23 @@ export default {
     const containerData: containerProps = { title: "首页", showToolBar: true };
     const list = ref([]);
     let content = ref("");
-    const pageInfo = reactive({page:1,size:10,total:0})
+    const pageInfo = reactive({ page: 1, size: 10, total: 0 });
     function getList() {
-      getMessageList(pageInfo).then(res=>{
+      getMessageList(pageInfo).then((res) => {
         list.value = res.data.data.content;
-        pageInfo.total = res.data.data.total
-      })
+        pageInfo.total = res.data.data.total;
+      });
     }
-    function changePage(page:any) {
-      console.log(page)
-      pageInfo.page = page
-      getList()
+    function changePage(page: any) {
+      console.log(page);
+      pageInfo.page = page;
+      getList();
     }
     function add() {
       console.log(new Date());
-      addMessage({content:content.value}).then(res=>{
-        getList()
-      })
-      
+      addMessage({ content: content.value }).then((res) => {
+        getList();
+      });
     }
     getList();
     return {
@@ -140,5 +143,4 @@ export default {
     border-radius: 20px;
   }
 }
-
 </style>

@@ -6,3 +6,4 @@ declare module '*.vue' {
 }
 
 declare module '@kangc/v-md-editor/lib/theme/vuepress.js';
+declare module 'three'

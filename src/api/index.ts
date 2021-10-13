@@ -11,15 +11,17 @@ export class HttpServer {
   // 简单封装一下方法
   request(config: any): AxiosPromise {
     return new Promise((resolve, reject) => {
-      this.axios(config).then((res: AxiosResponse) => {
-        resolve(res);
-      }).catch((err: any) => {
-        reject(err)
-      });
+      this.axios(config)
+        .then((res: AxiosResponse) => {
+          resolve(res);
+        })
+        .catch((err: any) => {
+          reject(err);
+        });
     });
   }
 }
 
-const http = new HttpServer()
+const http = new HttpServer();
 
-export default http
+export default http;

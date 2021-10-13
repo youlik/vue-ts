@@ -1,27 +1,59 @@
 <template>
   <div class="login-container">
-      <div class="login-control-container">
-        <div class="hand" v-if="!isPassword"></div>
-        <div class="hand" v-if="!isPassword" style="left:170px"></div>
-        <div class="arms" >
-          <div class="arm" :style="{transform: isPassword?'translateY(-40px) translateX(40px) scaleX(1)':''}"></div>
-          <div class="arm arm-right" :style="{transform: isPassword?'translateY(-40px) translateX(-40px) scaleX(-1)':''}"></div>
-        </div>
+    <div class="login-control-container">
+      <div class="hand" v-if="!isPassword"></div>
+      <div class="hand" v-if="!isPassword" style="left: 170px"></div>
+      <div class="arms">
+        <div
+          class="arm"
+          :style="{
+            transform: isPassword
+              ? 'translateY(-40px) translateX(40px) scaleX(1)'
+              : '',
+          }"
+        ></div>
+        <div
+          class="arm arm-right"
+          :style="{
+            transform: isPassword
+              ? 'translateY(-40px) translateX(-40px) scaleX(-1)'
+              : '',
+          }"
+        ></div>
       </div>
-      <div class="login-dialog">
-          <base-input label="用户名" v-model="username"></base-input>
-          <base-input label="密码" v-model="password" type="passward" @click="isPassword = true" @blur="isPassword = false"></base-input>
-          <base-input label="邮箱" v-if="isRegister"></base-input>
-          <div style="display:flex">
-              <baseButton type="primary" label="注册" @click="register"></baseButton>
-              <baseButton type="success" label="登录" v-if="!isRegister" @click="toLogin" style="margin-left:15px"></baseButton>
-              <baseButton type="success" label="取消" v-else @click="isRegister = false" style="margin-left:15px"></baseButton>
-          </div>
+    </div>
+    <div class="login-dialog">
+      <base-input label="用户名" v-model="username"></base-input>
+      <base-input
+        label="密码"
+        v-model="password"
+        type="passward"
+        @click="isPassword = true"
+        @blur="isPassword = false"
+      ></base-input>
+      <base-input label="邮箱" v-if="isRegister"></base-input>
+      <div style="display: flex">
+        <baseButton type="primary" label="注册" @click="register"></baseButton>
+        <baseButton
+          type="success"
+          label="登录"
+          v-if="!isRegister"
+          @click="toLogin"
+          style="margin-left: 15px"
+        ></baseButton>
+        <baseButton
+          type="success"
+          label="取消"
+          v-else
+          @click="isRegister = false"
+          style="margin-left: 15px"
+        ></baseButton>
       </div>
+    </div>
   </div>
 </template>
-  <script lang="ts">
-import { defineComponent,ref,getCurrentInstance,reactive } from "vue";
+<script lang="ts">
+import { defineComponent, ref, getCurrentInstance, reactive } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import { login } from "@/api/https_data";
@@ -30,64 +62,73 @@ import BaseButton from "@/baseComponents/baseButton/index.vue";
 import { ElMessage } from "_element-plus@1.0.2-beta.70@element-plus";
 export default defineComponent({
   name: "login",
-  components:{
+  components: {
     BaseInput,
-    BaseButton
+    BaseButton,
   },
-  setup(){
-      const router = useRouter()
-      const username = ref<string>(''),password = ref<string>('')
-      let isRegister = ref(false)
-      function toLogin(params:any) {
-        login({username:username.value,password:password.value}).then(res=>{
-          router.push({path:'/home'})
-          console.log(res.data)
-          localStorage.setItem('token',res.data.data.token)
-        }).catch(err=>{
-          console.log(err)
-          ElMessage.error(`${err.data.description}`)
+  setup() {
+    const router = useRouter();
+    const username = ref<string>(""),
+      password = ref<string>("");
+    let isRegister = ref(false);
+    function toLogin(params: any) {
+      login({ username: username.value, password: password.value })
+        .then((res) => {
+          router.push({ path: "/home" });
+          console.log(res.data);
+          localStorage.setItem("token", res.data.data.token);
         })
-      }
-      function fetchData(params:any) {
-        console.log(params)
-      }
-      function register(params:any) {
-        isRegister.value = true
-      }
-      let isPassword = ref(false)
-      console.log(isPassword.value)
-      return {
-          toLogin,isPassword,register,username,password,isRegister,fetchData
-      }
-  }
+        .catch((err) => {
+          console.log(err);
+          ElMessage.error(`${err.data.description}`);
+        });
+    }
+    function fetchData(params: any) {
+      console.log(params);
+    }
+    function register(params: any) {
+      isRegister.value = true;
+    }
+    let isPassword = ref(false);
+    console.log(isPassword.value);
+    return {
+      toLogin,
+      isPassword,
+      register,
+      username,
+      password,
+      isRegister,
+      fetchData,
+    };
+  },
 });
 </script>
-  
-  <style lang="scss" scoped>
+
+<style lang="scss" scoped>
 .login-container {
-    width:100vw;
-    height: 100vh;
-    margin: 0 auto;
-    position: relative;
-    background-image: url("../assets/backgroundImage.jpg");
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  background-image: url("../assets/backgroundImage.jpg");
 }
-.login-dialog{
-    width: 420px;
-    height: 408px;
-    // margin-right: 400px;
-    border-radius: 10px;
-    box-shadow: 10px 10px 5px 0px rgb(0 0 0 / 75%);
-    background: rgba(0, 0, 0, 0.43);
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: 100px;
-    top: 25%;
+.login-dialog {
+  width: 420px;
+  height: 408px;
+  // margin-right: 400px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px 0px rgb(0 0 0 / 75%);
+  background: rgba(0, 0, 0, 0.43);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 100px;
+  top: 25%;
 }
 
-.login-control-container{
+.login-control-container {
   width: 211px;
   height: 108px;
   margin-top: 5px;
@@ -98,7 +139,7 @@ export default defineComponent({
   background-image: url("../assets/login.png");
 }
 
-.hand{
+.hand {
   width: 34px;
   height: 34px;
   -webkit-border-radius: 40px;
@@ -119,15 +160,15 @@ export default defineComponent({
   bottom: -8px;
 }
 
-.arms{
-    top: 58px;
-    position: absolute;
-    width: 100%;
-    height: 41px;
-    overflow: hidden;
+.arms {
+  top: 58px;
+  position: absolute;
+  width: 100%;
+  height: 41px;
+  overflow: hidden;
 }
 
-.arm{
+.arm {
   width: 40px;
   height: 65px;
   position: absolute;
@@ -137,8 +178,8 @@ export default defineComponent({
 }
 // transform: translateY(-40px) translateX(40px) scaleX(1);
 
-.arm-right{
-  left: 158px;transform: rotate(20deg) scaleX(-1);
+.arm-right {
+  left: 158px;
+  transform: rotate(20deg) scaleX(-1);
 }
 </style>
-  

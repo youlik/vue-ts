@@ -18,7 +18,7 @@
           <template #title>{{ item.meta.title }}</template>
           <div v-for="(child, childIndex) in item.children" :key="childIndex">
             <el-menu-item
-              :index="handlePath(item.path,child.path)"
+              :index="handlePath(item.path, child.path)"
               route
               v-if="child.meta && !child.meta.hidden"
               >{{ child.meta.title }}</el-menu-item
@@ -30,8 +30,8 @@
   </section>
 </template>
 
-  <script lang="ts">
-import { defineComponent, reactive, ref , onMounted} from "vue";
+<script lang="ts">
+import { defineComponent, reactive, ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import routerObj from "../router/index";
 export interface sliderItemProps {
@@ -47,13 +47,13 @@ export default defineComponent({
       { name: "组件", url: "myComponents" },
       { name: "留言", url: "message" },
       { name: "博客", url: "blog" },
-    ]); 
-    let activeIndex = ref('/');
-    function handlePath(parent:string,path:string) {
-      if(path === 'home'){
-        return '/'
-      }else{
-        return `${parent}/${path}`
+    ]);
+    let activeIndex = ref("/");
+    function handlePath(parent: string, path: string) {
+      if (path === "home") {
+        return "/";
+      } else {
+        return `${parent}/${path}`;
       }
     }
     const route = useRouter();
@@ -61,20 +61,22 @@ export default defineComponent({
     function routerTo(url: string) {
       route.push({ path: url });
     }
-    onMounted(()=>{
-      if(window.location.href.split('/')[4] !== 'home'){
-        activeIndex.value = `/${window.location.href.split('/')[4]}/${window.location.href.split('/')[5]}`
-      }else{
-        return '/'
+    onMounted(() => {
+      if (window.location.href.split("/")[4] !== "home") {
+        activeIndex.value = `/${window.location.href.split("/")[4]}/${
+          window.location.href.split("/")[5]
+        }`;
+      } else {
+        return "/";
       }
-      console.log(window.location.href)
-    })
+      console.log(window.location.href);
+    });
     return { activeIndex, routeList, handlePath };
-  }, 
+  },
 });
 </script>
 
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
 @import "../assets/css/handle";
 .slider-container {
   width: 15%;
