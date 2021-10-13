@@ -21,7 +21,7 @@
   </div>
 </template>
   <script lang="ts">
-import { defineComponent,ref,getCurrentInstance } from "vue";
+import { defineComponent,ref,getCurrentInstance,reactive } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import { login } from "@/api/https_data";
@@ -36,24 +36,28 @@ export default defineComponent({
   },
   setup(){
       const router = useRouter()
-      const username = ref(''),password = ref('')
+      const username = ref<string>(''),password = ref<string>('')
       let isRegister = ref(false)
       function toLogin(params:any) {
-        login({username:'admin',password:'admin'}).then(res=>{
-          // router.push({path:'/layout/home'})
+        login({username:username.value,password:password.value}).then(res=>{
+          router.push({path:'/home'})
+          console.log(res.data)
+          localStorage.setItem('token',res.data.data.token)
         }).catch(err=>{
           console.log(err)
           ElMessage.error(`${err.data.description}`)
         })
       }
-
+      function fetchData(params:any) {
+        console.log(params)
+      }
       function register(params:any) {
         isRegister.value = true
       }
       let isPassword = ref(false)
       console.log(isPassword.value)
       return {
-          toLogin,isPassword,register,username,password,isRegister
+          toLogin,isPassword,register,username,password,isRegister,fetchData
       }
   }
 });

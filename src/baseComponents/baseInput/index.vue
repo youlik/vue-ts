@@ -14,20 +14,19 @@
           props:{
               label:String,
               type:String,
+              modelValue:String,
               margin:{
                   type:String,
                   default:"5px"
               }
           },
-          setup(props,{emit}){
+          setup(props,context){
               let currentValue = ref('')
               let ishover = ref(false)
               let timeId = 0
               watch( currentValue,(newValue,oldValue)=>{
                 clearTimeout(timeId)
-                timeId = setTimeout(()=>{
-                    emit('input',newValue)
-                },1000)
+                context.emit('update:modelValue',newValue)
               })
               
               return {currentValue,timeId,ishover}
