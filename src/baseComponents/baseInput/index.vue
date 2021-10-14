@@ -2,19 +2,21 @@
   <div
     class="base-input-container"
     :style="{ margin: margin }"
-    :class="{ ishover: ishover }"
+    :class="{ ishover: ishover,error:error }"
   >
     <span class="label-container">{{ label }}</span>
     <input
       v-model="currentValue"
-      @focus="ishover = true"
+      @focus="ishover = true;"
       @blur="
         ishover = false;
+        rules()
         $emit('blur');
       "
       :type="type"
       class="input-container"
     />
+    <span style="color:red;position:absolute;right:10px" v-show="error">{{errText}}</span>
   </div>
 </template>
 
@@ -28,6 +30,10 @@ export default defineComponent({
     label: String,
     type: String,
     modelValue: String,
+    reg:{
+      type:RegExp,
+      default:/\S/
+    },
     margin: {
       type: String,
       default: "5px",
@@ -36,13 +42,20 @@ export default defineComponent({
   setup(props, context) {
     let currentValue = ref("");
     let ishover = ref(false);
+    let errText = ref('')
     let timeId = 0;
     watch(currentValue, (newValue, oldValue) => {
       clearTimeout(timeId);
       context.emit("update:modelValue", newValue);
     });
-
-    return { currentValue, timeId, ishover };
+    let error = ref<boolean>(false)
+    function rules() {
+      error.value = !props.reg.test(currentValue.value)
+      if(error.value){
+        errText.value = '输入不合规！'
+      }
+    }
+    return { currentValue, timeId, ishover,error,rules,errText };
   },
 });
 </script>
@@ -73,7 +86,13 @@ export default defineComponent({
 .ishover {
   border: 1px solid $blue-1;
 }
+
+.error{
+  border:1px solid   red;
+}
 .label-container {
   padding: 0 10px;
+  min-width: 60px;
+  text-align: left;
 }
 </style>

@@ -83,9 +83,6 @@ export default defineComponent({
           ElMessage.error(`${err.data.description}`);
         });
     }
-    function fetchData(params: any) {
-      console.log(params);
-    }
     function register(params: any) {
       isRegister.value = true;
     }
@@ -98,7 +95,6 @@ export default defineComponent({
       username,
       password,
       isRegister,
-      fetchData,
     };
   },
 });
