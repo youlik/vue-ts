@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, onMounted } from "vue";
+import { defineComponent, reactive, ref, onMounted, createApp,getCurrentInstance } from "vue";
 import viewContainer, {
   containerProps,
 } from "../baseComponents/viewContainer/index.vue";
@@ -27,7 +27,7 @@ export default defineComponent({
     viewContainer,
     BaseButton,
   },
-  setup() {
+  setup(props,context) {
     const menuList: Array<any> = reactive([
       { name: "菜鸟", url: "" },
       { name: "掘金", url: "" },
@@ -39,6 +39,8 @@ export default defineComponent({
       window.document.documentElement.setAttribute("data-theme", "light");
       showDialog.value = false;
     };
+    const ctx:any = getCurrentInstance()
+    console.log(ctx)
     let scene, renderer, camera;
     const defaultMap = {
       x: 510,
@@ -52,7 +54,6 @@ export default defineComponent({
       renderer.setSize(1000, 800);
       document.querySelector<any>(".boxs").appendChild(renderer.domElement);
     };
-
     const setCamera = () => {
       const { x, y, z } = defaultMap;
       camera = new PerspectiveCamera(60, innerWidth / innerHeight, 1, 1000);
