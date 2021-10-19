@@ -20,12 +20,10 @@ import viewContainer, {
   containerProps,
 } from "../baseComponents/viewContainer/index.vue";
 import { Scene, WebGLRenderer, PerspectiveCamera } from "three";
-import BaseButton from "@/baseComponents/baseButton/index.vue";
 export default defineComponent({
   name: "Home",
   components: {
     viewContainer,
-    BaseButton,
   },
   setup(props,context) {
     const menuList: Array<any> = reactive([

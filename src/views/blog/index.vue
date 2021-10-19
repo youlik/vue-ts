@@ -19,16 +19,13 @@ import { defineComponent, reactive, ref } from "vue";
 import ViewContainer, {
   containerProps,
 } from "@/baseComponents/viewContainer/index.vue";
-import BaseButton from "@/baseComponents/baseButton/index.vue";
 import { getBlogList } from "@/api/https_data";
 import BlogCard from "./blogCard.vue";
-import axios from "axios";
 import { useRouter } from "vue-router";
 export default defineComponent({
   name: "Index",
   components: {
     ViewContainer,
-    BaseButton,
     BlogCard,
   },
   setup() {

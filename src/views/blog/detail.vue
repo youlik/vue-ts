@@ -1,5 +1,8 @@
 <template>
   <ViewContainer :list="containerData">
+    <template v-slot:tool>
+      <BaseButton label="返回" type="primary" ></BaseButton>
+    </template>
     <md-editor v-model="content" height="857px" previewOnly></md-editor>
   </ViewContainer>
 </template>
@@ -12,7 +15,6 @@ import ViewContainer, {
 } from "@/baseComponents/viewContainer/index.vue";
 import MdEditor from "md-editor-v3";
 import axios from "axios";
-import BaseButton from "@/baseComponents/baseButton/index.vue";
 export default defineComponent({
   name: "blogDetails",
   components: {

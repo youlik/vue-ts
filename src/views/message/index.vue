@@ -49,7 +49,7 @@
 import ViewContainer, {
   containerProps,
 } from "@/baseComponents/viewContainer/index.vue";
-import { reactive, ref } from "_vue@3.1.5@vue";
+import { reactive, ref } from "vue";
 import { getMessageList, addMessage } from "@/api/https_data";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
 
@@ -57,7 +57,7 @@ export default {
   name: "index",
   components: { ViewContainer, BaseButton },
   setup() {
-    const containerData: containerProps = { title: "首页", showToolBar: true };
+    const containerData: containerProps = { title: "留言", showToolBar: true };
     const list = ref([]);
     let content = ref("");
     const pageInfo = reactive({ page: 1, size: 10, total: 0 });

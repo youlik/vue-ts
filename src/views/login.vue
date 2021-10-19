@@ -55,16 +55,11 @@
 <script lang="ts">
 import { defineComponent, ref, getCurrentInstance, reactive } from "vue";
 import { useRouter } from "vue-router";
-import axios from "axios";
 import { login } from "@/api/https_data";
-import BaseInput from "@/baseComponents/baseInput/index.vue";
-import BaseButton from "@/baseComponents/baseButton/index.vue";
-import { ElMessage } from "_element-plus@1.0.2-beta.70@element-plus";
+import { ElMessage } from "element-plus";
 export default defineComponent({
   name: "login",
   components: {
-    BaseInput,
-    BaseButton,
   },
   setup() {
     const router = useRouter();
@@ -87,7 +82,6 @@ export default defineComponent({
       isRegister.value = true;
     }
     let isPassword = ref(false);
-    console.log(isPassword.value);
     return {
       toLogin,
       isPassword,
