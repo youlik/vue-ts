@@ -15,17 +15,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, onMounted, createApp,getCurrentInstance } from "vue";
+import {
+  defineComponent,
+  reactive,
+  ref,
+  onMounted,
+  createApp,
+  getCurrentInstance,
+} from "vue";
 import viewContainer, {
   containerProps,
 } from "../baseComponents/viewContainer/index.vue";
 import { Scene, WebGLRenderer, PerspectiveCamera } from "three";
+import { useTodoStore } from "@/store/todo.js";
 export default defineComponent({
   name: "Home",
   components: {
     viewContainer,
   },
-  setup(props,context) {
+  setup(props, context) {
     const menuList: Array<any> = reactive([
       { name: "菜鸟", url: "" },
       { name: "掘金", url: "" },
@@ -37,8 +45,10 @@ export default defineComponent({
       window.document.documentElement.setAttribute("data-theme", "light");
       showDialog.value = false;
     };
-    const ctx:any = getCurrentInstance()
-    console.log(ctx)
+    const a = useTodoStore();
+    console.log(a.title);
+    const ctx: any = getCurrentInstance();
+    console.log(ctx);
     let scene, renderer, camera;
     const defaultMap = {
       x: 510,

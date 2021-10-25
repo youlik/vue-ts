@@ -1,7 +1,7 @@
 <template>
   <ViewContainer :list="containerData">
     <template v-slot:tool>
-      <BaseButton label="返回" type="primary" ></BaseButton>
+      <BaseButton label="返回" type="primary"></BaseButton>
     </template>
     <md-editor v-model="content" height="857px" previewOnly></md-editor>
   </ViewContainer>

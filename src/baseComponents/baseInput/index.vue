@@ -2,21 +2,23 @@
   <div
     class="base-input-container"
     :style="{ margin: margin }"
-    :class="{ ishover: ishover,error:error }"
+    :class="{ ishover: ishover, error: error }"
   >
     <span class="label-container">{{ label }}</span>
     <input
       v-model="currentValue"
-      @focus="ishover = true;"
+      @focus="ishover = true"
       @blur="
         ishover = false;
-        rules()
+        rules();
         $emit('blur');
       "
       :type="type"
       class="input-container"
     />
-    <span style="color:red;position:absolute;right:10px" v-show="error">{{errText}}</span>
+    <span style="color: red; position: absolute; right: 10px" v-show="error">{{
+      errText
+    }}</span>
   </div>
 </template>
 
@@ -30,9 +32,9 @@ export default defineComponent({
     label: String,
     type: String,
     modelValue: String,
-    reg:{
-      type:RegExp,
-      default:/\S/
+    reg: {
+      type: RegExp,
+      default: /\S/,
     },
     margin: {
       type: String,
@@ -42,20 +44,20 @@ export default defineComponent({
   setup(props, context) {
     let currentValue = ref("");
     let ishover = ref(false);
-    let errText = ref('')
+    let errText = ref("");
     let timeId = 0;
     watch(currentValue, (newValue, oldValue) => {
       clearTimeout(timeId);
       context.emit("update:modelValue", newValue);
     });
-    let error = ref<boolean>(false)
+    let error = ref<boolean>(false);
     function rules() {
-      error.value = !props.reg.test(currentValue.value)
-      if(error.value){
-        errText.value = '输入不合规！'
+      error.value = !props.reg.test(currentValue.value);
+      if (error.value) {
+        errText.value = "输入不合规！";
       }
     }
-    return { currentValue, timeId, ishover,error,rules,errText };
+    return { currentValue, timeId, ishover, error, rules, errText };
   },
 });
 </script>
@@ -87,8 +89,8 @@ export default defineComponent({
   border: 1px solid $blue-1;
 }
 
-.error{
-  border:1px solid   red;
+.error {
+  border: 1px solid red;
 }
 .label-container {
   padding: 0 10px;

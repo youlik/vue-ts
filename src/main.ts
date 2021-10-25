@@ -8,10 +8,10 @@ import elementPlus from "element-plus";
 import "element-plus/lib/theme-chalk/index.css";
 import "lib-flexible/flexible";
 import "@/styles/element-ui.scss";
-import ViewContainer from '@/baseComponents/viewContainer/index.vue'
-import BaseInput from '@/baseComponents/baseInput/index.vue'
-import BaseButton from '@/baseComponents/baseButton/index.vue';
-
+import ViewContainer from "@/baseComponents/viewContainer/index.vue";
+import BaseInput from "@/baseComponents/baseInput/index.vue";
+import BaseButton from "@/baseComponents/baseButton/index.vue";
+import { createPinia } from "pinia";
 // import Prism from 'hl';
 
 // import store from './store'
@@ -28,8 +28,9 @@ const app = createApp(App);
 // installMaxerStore(app)
 app.use(axiosPlugin);
 app.use(elementPlus);
+app.use(createPinia());
 // 全局注册组件
-app.component('ViewContainer',ViewContainer)
-app.component('BaseInput',BaseInput)
-app.component('BaseButton',BaseButton)
+app.component("ViewContainer", ViewContainer);
+app.component("BaseInput", BaseInput);
+app.component("BaseButton", BaseButton);
 app.use(router).mount("#app");

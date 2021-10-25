@@ -1,6 +1,6 @@
 <template>
   <div class="blog-card-container">
-    <div class="text-title">时间：{{ list.update_time }}</div>
+    <div class="text-title">时间：{{ time }}</div>
     <span class="text-highlight">{{ list.title }}</span>
     <!-- <span>{{content}}</span> -->
     <div class="label-container">未分类</div>
@@ -9,6 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, reactive, ref, PropType } from "vue";
+import { transfromTime } from "@/utils/timeFunc";
 export interface blogCardProps {
   title: string;
   content: string;
@@ -32,7 +33,9 @@ export default defineComponent({
       console.log(contentData);
       return contentData.slice(0, 20);
     });
-
+    const time = computed(() => {
+      return transfromTime(props.list.update_time);
+    });
     function getSimpleText(html: any) {
       var re1 = new RegExp("<.+?>", "g"); //匹配html标签的正则表达式，"g"是搜索匹配多个符合的内容
       var msg = html.replace(re1, ""); //执行替换成空字符
@@ -41,6 +44,7 @@ export default defineComponent({
 
     return {
       content,
+      time, 
     };
   },
 });
@@ -85,5 +89,6 @@ export default defineComponent({
   color: #c9cdd4;
   font-size: 13px;
   padding: 3px;
+  cursor: pointer;
 }
 </style>

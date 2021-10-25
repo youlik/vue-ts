@@ -29,15 +29,8 @@ export default defineComponent({
     BlogCard,
   },
   setup() {
-    let content = ref("");
     const route = useRouter();
     let cardList = ref([]);
-    let cardData = {
-      title: "博客",
-      time: "2021-01-01",
-      content: "缩",
-      label: "vue",
-    };
     const containerData: containerProps = { title: "首页", showToolBar: true };
     function addBlog(params: any) {
       route.push("addBlog");
@@ -55,9 +48,7 @@ export default defineComponent({
     });
 
     return {
-      content,
       addBlog,
-      cardData,
       containerData,
       cardList,
       routerTo,

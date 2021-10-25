@@ -2,7 +2,13 @@
   <div class="view-container">
     <div class="tool-bar-container">
       <div
-        style="width: 50%;font-size:16px; line-height: 50px; text-align: left; padding: 0 5px"
+        style="
+          width: 50%;
+          font-size: 16px;
+          line-height: 50px;
+          text-align: left;
+          padding: 0 5px;
+        "
       >
         {{ list.title }}
       </div>

@@ -59,8 +59,7 @@ import { login } from "@/api/https_data";
 import { ElMessage } from "element-plus";
 export default defineComponent({
   name: "login",
-  components: {
-  },
+  components: {},
   setup() {
     const router = useRouter();
     const username = ref<string>(""),
