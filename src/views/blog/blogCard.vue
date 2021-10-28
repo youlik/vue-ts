@@ -3,7 +3,7 @@
     <div class="text-title">时间：{{ time }}</div>
     <span class="text-highlight">{{ list.title }}</span>
     <!-- <span>{{content}}</span> -->
-    <div class="label-container">未分类</div>
+    <div class="label-container" @click.stop="() => {}">未分类</div>
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default defineComponent({
 
     return {
       content,
-      time, 
+      time,
     };
   },
 });
