@@ -7,7 +7,13 @@
         @click="showDialog = true"
       ></base-button>
     </template>
-    <div style="padding: 30px" class="boxs"></div>
+    <!-- <div style="padding: 30px" class="boxs"></div> -->
+    <base-table :list="[{ name: '张三', age: 16 }]">
+      <el-table-column label="名字" prop="name"></el-table-column>
+      <base-column label="名字" prop="name"></base-column>
+      <base-column label="年龄" prop="age"></base-column>
+    </base-table>
+    <el-table :data="[{ name: '张三', age: 16 }]"></el-table>
     <div class="mark-container" v-show="showDialog">
       <div class="mark-item-container" @click="replaceTheme">猛男粉</div>
     </div>
@@ -27,11 +33,13 @@ import viewContainer, {
   containerProps,
 } from "../baseComponents/viewContainer/index.vue";
 import { Scene, WebGLRenderer, PerspectiveCamera } from "three";
-import { useTodoStore } from "@/store/todo.js";
+import BaseColumn from "../baseComponents/baseColumn/index.vue";
+// import { useTodoStore } from "@/store/todo.js";
 export default defineComponent({
   name: "Home",
   components: {
     viewContainer,
+    BaseColumn,
   },
   setup(props, context) {
     const menuList: Array<any> = reactive([
@@ -45,8 +53,8 @@ export default defineComponent({
       window.document.documentElement.setAttribute("data-theme", "light");
       showDialog.value = false;
     };
-    const a = useTodoStore();
-    console.log(a.title);
+    // const a = useTodoStore();
+    // console.log(a.title);
     const ctx: any = getCurrentInstance();
     console.log(ctx);
     let scene, renderer, camera;
@@ -73,7 +81,7 @@ export default defineComponent({
       setCamera();
     };
     //用vue钩子函数调用
-    onMounted(init);
+    // onMounted(init);
     const containerData: containerProps = { title: "首页", showToolBar: true };
     return {
       menuList,
