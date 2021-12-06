@@ -1,9 +1,5 @@
 <template>
-  <div style="width: 100%; height: 50px">
-    <el-table-column :label="label" :prop="`${prop}`">
-      <slot></slot>
-    </el-table-column>
-  </div>
+  <el-table-column :label="label" :prop="prop"> </el-table-column>
 </template>
 
 <script lang="ts">
@@ -13,7 +9,7 @@ export default defineComponent({
   props: {
     label: {
       type: String,
-      default: "张三",
+      default: "",
     },
     type: {
       type: String,

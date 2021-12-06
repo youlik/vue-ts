@@ -1,6 +1,6 @@
 <template>
   <div class="el-table-container">
-    <el-table :data="list" height="500">
+    <el-table :data="list" height="500" border>
       <slot></slot>
     </el-table>
   </div>

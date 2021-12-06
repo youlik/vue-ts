@@ -8,12 +8,14 @@
       ></base-button>
     </template>
     <!-- <div style="padding: 30px" class="boxs"></div> -->
-    <base-table :list="[{ name: '张三', age: 16 }]">
-      <el-table-column label="名字" prop="name"></el-table-column>
-      <base-column label="名字" prop="name"></base-column>
-      <base-column label="年龄" prop="age"></base-column>
+    <base-table
+      :list="[{ name: '便携式手提灯', price: '商品价格', date: '2020-10' }]"
+    >
+      <base-column label="商品名称" prop="name"></base-column>
+      <base-column label="商品价格" prop="price"></base-column>
+      <base-column label="生产日期" prop="date"></base-column>
     </base-table>
-    <el-table :data="[{ name: '张三', age: 16 }]"></el-table>
+    <base-pagination></base-pagination>
     <div class="mark-container" v-show="showDialog">
       <div class="mark-item-container" @click="replaceTheme">猛男粉</div>
     </div>
@@ -34,12 +36,14 @@ import viewContainer, {
 } from "../baseComponents/viewContainer/index.vue";
 import { Scene, WebGLRenderer, PerspectiveCamera } from "three";
 import BaseColumn from "../baseComponents/baseColumn/index.vue";
+import BasePagination from "@/baseComponents/basePagination/index.vue";
 // import { useTodoStore } from "@/store/todo.js";
 export default defineComponent({
   name: "Home",
   components: {
     viewContainer,
     BaseColumn,
+    BasePagination,
   },
   setup(props, context) {
     const menuList: Array<any> = reactive([
@@ -51,8 +55,13 @@ export default defineComponent({
     let showDialog = ref(false);
     let replaceTheme = function () {
       window.document.documentElement.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
       showDialog.value = false;
     };
+    onMounted(() => {
+      let nowTheme = localStorage.getItem("theme") || "dark";
+      window.document.documentElement.setAttribute("data-theme", nowTheme);
+    });
     // const a = useTodoStore();
     // console.log(a.title);
     const ctx: any = getCurrentInstance();

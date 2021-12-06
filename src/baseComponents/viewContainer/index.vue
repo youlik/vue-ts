@@ -8,9 +8,12 @@
           line-height: 50px;
           text-align: left;
           padding: 0 5px;
+          display: flex;
+          overflow: hidden;
         "
       >
-        {{ list.title }}
+        <div>{{ list.title }}</div>
+        <scrollViews></scrollViews>
       </div>
       <div
         style="
@@ -32,6 +35,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+import scrollViews from "@/baseComponents/scrollViews/index.vue";
 // 定义所需参数的接口
 export interface containerProps {
   title: string;
@@ -39,7 +43,9 @@ export interface containerProps {
 }
 export default defineComponent({
   name: "viewContainer",
-  components: {},
+  components: {
+    scrollViews,
+  },
   props: {
     // 用list来接受参数
     list: {

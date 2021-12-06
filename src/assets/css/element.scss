@@ -1,3 +1,37 @@
+// 表格
 .el-table{
-    background-color: rgba($color: #0d2163, $alpha: 0.8);
+    background-color: $el-table-bg;
+    border: 1px solid 	$el-table-border-color;
+    border-radius: 4px;
+}
+
+.el-table--enable-row-transition .el-table__body td{
+    background-color: $el-table-bg;
+    // color: #fff;
+}
+.el-table--enable-row-hover .el-table__body tr:hover>td{
+    background-color:transparent;
+}
+
+.el-table td, .el-table th.is-leaf{
+    border-bottom: 1px solid 	$el-table-border-color;
+}
+
+.el-table--border td, .el-table--border th{
+    border-right: 1px solid 	$el-table-border-color;
+}
+
+.el-table--border th{
+    background-color: $el-table-header-bg;
+    color: $text-normal-color;
+}
+
+
+// 菜单
+.el-menu{
+    --el-menu-background-color : ''
+}
+
+.el-menu.el-menu--horizontal{
+    border:none
 }
