@@ -12,6 +12,7 @@ import ViewContainer from "@/baseComponents/viewContainer/index.vue";
 import BaseInput from "@/baseComponents/baseInput/index.vue";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
 import BaseTable from "@/baseComponents/baseTable/index.vue";
+import zhCn from "element-plus/es/locale/lang/zh-cn";
 // import { createPinia } from "pinia";
 // import Prism from 'hl';
 

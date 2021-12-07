@@ -9,10 +9,16 @@
     </template>
     <!-- <div style="padding: 30px" class="boxs"></div> -->
     <base-table
-      :list="[{ name: '便携式手提灯', price: '商品价格', date: '2020-10' }]"
+      :list="[
+        { name: '便携式手提灯', price: '10', date: '2020-10', type: '日用' },
+        { name: '牙刷', price: '5', date: '2020-10', type: '日用' },
+        { name: '洗洁精', price: '12', date: '2020-10', type: '厨房' },
+        { name: '洗碗布', price: '10', date: '2020-10', type: '厨房' },
+      ]"
     >
       <base-column label="商品名称" prop="name"></base-column>
       <base-column label="商品价格" prop="price"></base-column>
+      <base-column label="商品类别" prop="type"></base-column>
       <base-column label="生产日期" prop="date"></base-column>
     </base-table>
     <base-pagination></base-pagination>

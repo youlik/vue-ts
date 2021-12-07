@@ -1,8 +1,9 @@
 <template>
-  <div class="base-select-container">
+  <div class="base-select-container" @click="$refs.input.focus()">
     <span class="label">{{ label }}</span>
     <input
       v-model="currentValue"
+      ref="input"
       @focus="showOptions = true"
       @blur="showOptions = false"
     />
@@ -60,11 +61,13 @@ export default defineComponent({
   height: 40px;
   width: 256px;
   line-height: 40px;
-  border: 1px solid red;
+  border: 1px solid $base-select-border-color;
   box-sizing: border-box;
   border-radius: 4px;
   display: flex;
   position: relative;
+  cursor: pointer;
+  background-color: $base-select-bg;
   .label {
     padding: 0 5px;
   }
@@ -75,6 +78,8 @@ export default defineComponent({
     padding: 0;
     height: 38px;
     outline: none;
+    cursor: pointer;
+    background-color: transparent;
   }
 }
 
@@ -87,6 +92,7 @@ export default defineComponent({
   width: 100%;
   padding: 0;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+  background-color: $base-select-option-bg;
   li:not(:nth-last-child(-n + 1)) {
     border-bottom: 1px solid #dcdcdc;
   }
@@ -99,7 +105,6 @@ export default defineComponent({
   padding-left: 40px;
 }
 .selected {
-  background-color: $blue-1;
-  color: #ffffff;
+  background-color: $base-select-option-select;
 }
 </style>

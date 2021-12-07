@@ -20,6 +20,7 @@ export default defineComponent({
       "路漫漫其修远兮,吾将上下而求索。",
       "长风破浪会有时，直挂云帆济沧海。",
     ];
+
     let animatess = ref(false);
     let timeId = setInterval(() => {
       animatess.value = true;
@@ -30,7 +31,7 @@ export default defineComponent({
       }, 500);
     }, 2000);
 
-    return { list, animatess };
+    return { list, animatess, timeId };
   },
 });
 </script>

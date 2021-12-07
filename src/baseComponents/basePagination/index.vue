@@ -1,6 +1,12 @@
 <template>
-  <el-pagination background layout="prev, pager, next" :total="pageInfo.total">
-  </el-pagination>
+  <div style="pagination-contianer">
+    <el-pagination
+      background
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="pageInfo.total"
+    >
+    </el-pagination>
+  </div>
 </template>
 
 <script lang="ts">
@@ -22,4 +28,8 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.pagination-contianer {
+  background-color: aqua;
+}
+</style>

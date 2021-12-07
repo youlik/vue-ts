@@ -1,6 +1,6 @@
 <template>
   <div class="el-table-container">
-    <el-table :data="list" height="500" border>
+    <el-table :data="list" height="100%" border>
       <slot></slot>
     </el-table>
   </div>
@@ -19,5 +19,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .el-table-container {
   padding: 10px;
+  height: calc(100% - 80px);
 }
 </style>
