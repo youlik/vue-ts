@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="login-dialog">
-      <base-input label="用户名" v-model="username"></base-input>
+      <base-input label="邮箱" v-model="email"></base-input>
       <base-input
         label="密码"
         v-model="password"
@@ -31,9 +31,19 @@
         @click="isPassword = true"
         @blur="isPassword = false"
       ></base-input>
-      <base-input label="邮箱" v-if="isRegister"></base-input>
       <div style="display: flex">
-        <baseButton type="primary" label="注册" @click="register"></baseButton>
+        <baseButton
+          type="primary"
+          label="注册"
+          @click="register"
+          v-if="!isRegister"
+        ></baseButton>
+        <baseButton
+          type="primary"
+          label="提交"
+          @click="confirm"
+          v-else
+        ></baseButton>
         <baseButton
           type="success"
           label="登录"
@@ -57,27 +67,30 @@ import { defineComponent, ref, getCurrentInstance, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { login } from "@/api/https_data";
 import { ElMessage } from "element-plus";
+import { handleLogin, handleRegister } from "@/api/useAuth";
 export default defineComponent({
   name: "login",
   components: {},
   setup() {
     const router = useRouter();
-    const username = ref<string>(""),
+    const email = ref<string>(""),
       password = ref<string>("");
     let isRegister = ref(false);
     function toLogin(params: any) {
-      login({ username: username.value, password: password.value })
+      handleLogin({ email: email.value, password: password.value })
         .then((res) => {
+          console.log("----");
           router.push({ path: "/home" });
-          console.log(res.data);
-          localStorage.setItem("token", res.data.data.token);
+          console.log(res);
         })
         .catch((err) => {
           console.log(err);
-          ElMessage.error(`${err.data.description}`);
         });
     }
-    function register(params: any) {
+    function confirm(): void {
+      handleRegister({ email: email.value, password: password.value });
+    }
+    function register() {
       isRegister.value = true;
     }
     let isPassword = ref(false);
@@ -85,9 +98,10 @@ export default defineComponent({
       toLogin,
       isPassword,
       register,
-      username,
+      email,
       password,
       isRegister,
+      confirm,
     };
   },
 });

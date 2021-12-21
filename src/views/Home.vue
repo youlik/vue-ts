@@ -59,11 +59,15 @@ export default defineComponent({
       { name: "思否", url: "" },
     ]);
     let showDialog = ref(false);
+    let a = reactive({});
     let replaceTheme = function () {
       window.document.documentElement.setAttribute("data-theme", "light");
       localStorage.setItem("theme", "light");
       showDialog.value = false;
     };
+    function mountFunc() {
+      console.log("------");
+    }
     onMounted(() => {
       let nowTheme = localStorage.getItem("theme") || "dark";
       window.document.documentElement.setAttribute("data-theme", nowTheme);
@@ -103,6 +107,7 @@ export default defineComponent({
       replaceTheme,
       showDialog,
       containerData,
+      mountFunc,
     };
   },
 });

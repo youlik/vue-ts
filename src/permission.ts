@@ -17,15 +17,17 @@ router.beforeEach((to: any, from: any, next: any): void => {
   NProgress.start();
   if (hasToken) {
     next();
+    NProgress.done();
   } else {
     if (to.path !== "/login") {
       next("/login");
     } else {
       next();
     }
+    NProgress.done();
   }
 });
 
-router.afterEach((): void => {
+router.afterEach(() => {
   NProgress.done();
 });

@@ -13,6 +13,8 @@ import BaseInput from "@/baseComponents/baseInput/index.vue";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
 import BaseTable from "@/baseComponents/baseTable/index.vue";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
+import { supabase } from "./lib/supabase";
+import { userSession } from "./api/useAuth";
 // import { createPinia } from "pinia";
 // import Prism from 'hl';
 
@@ -24,6 +26,10 @@ import zhCn from "element-plus/es/locale/lang/zh-cn";
 //         $m:Maxer
 //     }
 // }
+// supabase.auth.onAuthStateChange((event, session) => {
+//   console.log(session);
+//   userSession.value = session;
+// });
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "/api";
 const app = createApp(App);
