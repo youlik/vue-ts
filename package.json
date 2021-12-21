@@ -5,10 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "packager": "electron-packager ./dist --platform=win32 --arch=x64 --out ./OutApp --electron-version 6.0.5 --overwrite "
   },
   "dependencies": {
     "@kangc/v-md-editor": "^2.3.7",
+    "@supabase/supabase-js": "^1.28.6",
     "@types/nprogress": "^0.2.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
@@ -28,6 +30,7 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.16.0",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -38,6 +41,8 @@
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
+    "electron": "^16.0.4",
+    "electron-packager": "^15.4.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",

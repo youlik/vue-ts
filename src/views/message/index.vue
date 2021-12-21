@@ -6,10 +6,9 @@
         v-for="(item, index) in list"
         :key="index"
       >
-        <img class="img-container" src="../../assets/portrait1.jpg" />
         <div style="width: 100%; display: flex; flex-direction: column">
           <div class="title" style="text-align: left">{{ item.name }}</div>
-          <div class="content">{{ item.content }}</div>
+          <div class="content">{{ item.context }}</div>
           <div
             style="
               display: flex;
@@ -17,7 +16,8 @@
               justify-content: space-between;
             "
           >
-            <span>第{{ index + 1 }}楼</span><span>{{ item.time }}</span>
+            <span>第{{ index + 1 }}楼</span
+            ><span>{{ transfromTime(item.updated_at) }}</span>
           </div>
         </div>
       </div>
@@ -51,20 +51,27 @@ import ViewContainer, {
 } from "@/baseComponents/viewContainer/index.vue";
 import { reactive, ref } from "vue";
 import { getMessageList, addMessage } from "@/api/https_data";
+import { transfromTime } from "@/utils/timeFunc";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
-
+import { getMessage } from "@/api/leaveMessage";
+interface messageData {
+  created_at: string;
+  id: string;
+  context: string;
+  user_id: string;
+}
 export default {
   name: "index",
   components: { ViewContainer, BaseButton },
   setup() {
     const containerData: containerProps = { title: "留言", showToolBar: true };
-    const list = ref([]);
+    const list: any = ref([]);
     let content = ref("");
     const pageInfo = reactive({ page: 1, size: 10, total: 0 });
     function getList() {
-      getMessageList(pageInfo).then((res) => {
-        list.value = res.data.data.content;
-        pageInfo.total = res.data.data.total;
+      getMessage().then((res) => {
+        console.log(list.value);
+        list.value = res;
       });
     }
     function changePage(page: any) {
@@ -86,6 +93,7 @@ export default {
       pageInfo,
       changePage,
       add,
+      transfromTime,
     };
   },
 };

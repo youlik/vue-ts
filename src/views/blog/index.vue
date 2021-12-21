@@ -7,7 +7,7 @@
       <blog-card
         :list="item"
         v-for="(item, index) in cardList"
-        @click="routerTo"
+        @click="routerTo(item.id)"
         :key="index"
       ></blog-card>
     </div>
@@ -19,7 +19,7 @@ import { defineComponent, reactive, ref } from "vue";
 import ViewContainer, {
   containerProps,
 } from "@/baseComponents/viewContainer/index.vue";
-import { getBlogList } from "@/api/https_data";
+import { getBlog } from "@/api/blog";
 import BlogCard from "./blogCard.vue";
 import { useRouter } from "vue-router";
 export default defineComponent({
@@ -30,23 +30,21 @@ export default defineComponent({
   },
   setup() {
     const route = useRouter();
-    let cardList = ref([]);
+    let cardList: any = ref([]);
     const containerData: containerProps = { title: "首页", showToolBar: true };
     function addBlog(params: any) {
       route.push("addBlog");
     }
-    function routerTo() {
-      route.push("blogDetails");
+    function routerTo(id: string) {
+      route.push({ path: "blogDetails", query: { blogId: id } });
     }
 
-    getBlogList({}).then((res) => {
-      console.log(res);
-      cardList.value = res.data.data;
-      cardList.value.forEach((item) => {
-        item = Object.assign({}, item, { label: "555" });
+    function getBlogList(): void {
+      getBlog().then((res) => {
+        cardList.value = res;
       });
-    });
-
+    }
+    getBlogList();
     return {
       addBlog,
       containerData,

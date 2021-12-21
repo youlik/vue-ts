@@ -15,6 +15,7 @@ import ViewContainer, {
 } from "@/baseComponents/viewContainer/index.vue";
 import MdEditor from "md-editor-v3";
 import axios from "axios";
+import { getBlog } from "@/api/blog";
 export default defineComponent({
   name: "blogDetails",
   components: {
@@ -25,9 +26,9 @@ export default defineComponent({
     let content = ref("");
     let title = ref("");
     function getList() {
-      axios.get("/list/getBlogList").then((res) => {
-        content.value = res.data.data[0].content;
-        title.value = res.data.data[0].value;
+      getBlog().then((res: any) => {
+        content.value = res[0].context;
+        title.value = res[0].title;
       });
     }
     getList();

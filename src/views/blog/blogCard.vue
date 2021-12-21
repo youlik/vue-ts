@@ -1,6 +1,6 @@
 <template>
   <div class="blog-card-container">
-    <div class="text-title">时间：{{ time }}</div>
+    <div class="text-title">时间：{{ list.title }}</div>
     <span class="text-highlight">{{ list.title }}</span>
     <!-- <span>{{content}}</span> -->
     <div class="label-container" @click.stop="() => {}">未分类</div>
