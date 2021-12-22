@@ -7,7 +7,7 @@
     ></el-input>
     <md-editor v-model="content"></md-editor>
     <template v-slot:tool>
-      <BaseButton label="提交" type="primary" @click="addBlog"></BaseButton>
+      <BaseButton label="提交" type="primary" @click="confrim"></BaseButton>
     </template>
   </ViewContainer>
 </template>
@@ -19,8 +19,8 @@ import ViewContainer, {
   containerProps,
 } from "@/baseComponents/viewContainer/index.vue";
 import MdEditor from "md-editor-v3";
-import axios from "axios";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
+import { addBlog } from "@/api/blog";
 export default defineComponent({
   name: "Home",
   components: {
@@ -31,11 +31,15 @@ export default defineComponent({
   setup() {
     let content = ref("");
     let title = ref("");
-    function addBlog(params: any) {
+    function confrim(params: any) {
       console.log("触发");
-      axios.post("/list/addBlog", {
+      addBlog({
+        id: 7,
+        created_at: new Date(),
+        updated_at: new Date(),
         title: title.value,
-        content: content.value,
+        context: content.value,
+        label: 1,
       });
     }
     const containerData: containerProps = {
@@ -44,7 +48,7 @@ export default defineComponent({
     };
     return {
       content,
-      addBlog,
+      confrim,
       containerData,
       title,
     };

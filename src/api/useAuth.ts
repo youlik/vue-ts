@@ -11,17 +11,18 @@ interface Credentials {
 // 登录
 async function handleLogin(credentials: Credentials) {
   try {
-    const { error, user } = await supabase.auth.signIn({
+    const { error, ...data } = await supabase.auth.signIn({
       email: credentials.email,
       password: credentials.password,
     });
+    return data;
     if (error) {
       //   alert("Error logging in: " + error.message);
     }
     // No error throw, but no user detected so send magic link
-    if (!error && !user) {
-      //   alert("Check your email for the login link!");
-    }
+    // if (!error && !user) {
+    //   alert("Check your email for the login link!");
+    // }
   } catch (error) {
     console.error("Error thrown:", error.message);
     // alert(error.error_description || error);
@@ -30,15 +31,16 @@ async function handleLogin(credentials: Credentials) {
 
 async function handleRegister(credentials: Credentials) {
   try {
-    const { error, user } = await supabase.auth.signUp({
+    const { error, ...data } = await supabase.auth.signUp({
       email: credentials.email,
       password: credentials.password,
     });
+    return data;
     if (error) {
       //   alert("Error logging in: " + error.message);
     }
     // No error throw, but no user detected so send magic link
-    if (!error && !user) {
+    if (!error && !data.user) {
       alert("Check your email for the login link!");
     }
   } catch (error) {

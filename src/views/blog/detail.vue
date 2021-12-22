@@ -1,12 +1,16 @@
 <template>
   <ViewContainer :list="containerData">
     <template v-slot:tool>
-      <BaseButton label="返回" type="primary"></BaseButton>
+      <BaseButton label="返回" type="primary" @click="back"></BaseButton>
     </template>
-    <md-editor v-model="content" height="857px" previewOnly></md-editor>
+    <md-editor
+      v-model="content"
+      height="857px"
+      previewOnly
+      prettier
+    ></md-editor>
   </ViewContainer>
 </template>
-
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
 import "md-editor-v3/lib/style.css";
@@ -14,31 +18,40 @@ import ViewContainer, {
   containerProps,
 } from "@/baseComponents/viewContainer/index.vue";
 import MdEditor from "md-editor-v3";
-import axios from "axios";
+import { useRoute } from "vue-router";
 import { getBlog } from "@/api/blog";
+import router from "@/router";
 export default defineComponent({
   name: "blogDetails",
   components: {
     ViewContainer,
     MdEditor,
   },
-  setup() {
+  setup(props, context) {
     let content = ref("");
     let title = ref("");
+    let route = useRoute();
+    let id = route.query.blogId;
+    console.log(context);
     function getList() {
       getBlog().then((res: any) => {
-        content.value = res[0].context;
-        title.value = res[0].title;
+        let currentBlog = res.filter((item) => item.id == id)[0];
+        content.value = currentBlog.context;
+        title.value = currentBlog.title;
       });
     }
     getList();
     const containerData: containerProps = {
       title: title.value,
-      showToolBar: false,
+      showToolBar: true,
     };
+    function back() {
+      router.back();
+    }
     return {
       content,
       containerData,
+      back,
     };
   },
 });

@@ -6,7 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "packager": "electron-packager ./dist --platform=win32 --arch=x64 --out ./OutApp --electron-version 6.0.5 --overwrite "
+    "packager": "electron-packager ./dist --platform=win32 --arch=x64 --out ./OutApp --electron-version 6.0.5 --overwrite ",
+    "packgerMac":""
+    
   },
   "dependencies": {
     "@kangc/v-md-editor": "^2.3.7",

@@ -63,9 +63,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, getCurrentInstance, reactive } from "vue";
+import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-import { login } from "@/api/https_data";
 import { ElMessage } from "element-plus";
 import { handleLogin, handleRegister } from "@/api/useAuth";
 export default defineComponent({
@@ -76,12 +75,13 @@ export default defineComponent({
     const email = ref<string>(""),
       password = ref<string>("");
     let isRegister = ref(false);
-    function toLogin(params: any) {
+    function toLogin() {
       handleLogin({ email: email.value, password: password.value })
-        .then((res) => {
-          console.log("----");
-          router.push({ path: "/home" });
+        .then((res: any) => {
           console.log(res);
+          ElMessage.success("登录成功！");
+          router.push({ path: "/home" });
+          localStorage.setItem("token", res["access_token"]);
         })
         .catch((err) => {
           console.log(err);
