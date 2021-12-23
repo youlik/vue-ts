@@ -11,10 +11,7 @@
         :key="index"
       ></blog-card>
     </div>
-    <process-bar
-      :is-show="!!cardList.length"
-      v-if="!cardList.length"
-    ></process-bar>
+    <process-bar v-if="!cardList.length"></process-bar>
   </ViewContainer>
 </template>
 

@@ -1,92 +1,111 @@
 <template>
   <div class="main-container">
-    <div
-      :class="bar.className"
-      :style="{ opacity: bar.opacity }"
-      v-for="(bar, index) in bars"
-      :key="index"
-    ></div>
+    <div class="fingerprint-spinner">
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-import { ref, defineComponent, reactive } from "vue";
-export default defineComponent({
-  props: {
-    isShow: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  setup(props) {
-    const bars = reactive([
-      {
-        opacity: 0.5,
-        className: "small-bar",
-      },
-      {
-        opacity: 0.5,
-        className: "middle-bar",
-      },
-      {
-        opacity: 0.5,
-        className: "high-bar",
-      },
-      {
-        opacity: 0.5,
-        className: "middle-bar",
-      },
-      {
-        opacity: 0.5,
-        className: "small-bar",
-      },
-    ]);
-    let barIndex = 0;
-    const timeId = setInterval(() => {
-      barIndex > 4 && (barIndex = 0);
-      for (let i in bars) {
-        bars[i].opacity = 0.1;
-      }
-      bars[barIndex].opacity = 1;
-      barIndex++;
-    }, 500);
-    console.log(props.isShow);
-    !props.isShow && clearInterval(timeId);
-    return {
-      bars,
-    };
-  },
-});
-</script>
+<script lang="ts"></script>
 
 <style lang="scss" scoped>
 .main-container {
   position: absolute;
-  left: 50%;
   top: 50%;
-  width: 300px;
-  height: 200px;
-  display: flex;
-  align-items: center;
+  left: 50%;
 }
-.small-bar {
-  height: 20px;
-  width: 10px;
-  background-color: aqua;
-  margin-right: 5px;
+.fingerprint-spinner,
+.fingerprint-spinner * {
+  box-sizing: border-box;
 }
 
-.middle-bar {
-  height: 50px;
-  width: 10px;
-  background-color: aqua;
-  margin-right: 5px;
+.fingerprint-spinner {
+  height: 64px;
+  width: 64px;
+  padding: 2px;
+  overflow: hidden;
+  position: relative;
 }
 
-.high-bar {
-  height: 100px;
-  width: 10px;
-  background-color: aqua;
-  margin-right: 5px;
+.fingerprint-spinner .spinner-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: #1de5ff;
+  animation: fingerprint-spinner-animation 1500ms
+    cubic-bezier(0.68, -0.75, 0.265, 1.75) infinite forwards;
+  margin: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.fingerprint-spinner .spinner-ring:nth-child(1) {
+  height: calc(60px / 9 + 0 * 60px / 9);
+  width: calc(60px / 9 + 0 * 60px / 9);
+  animation-delay: calc(50ms * 1);
+}
+
+.fingerprint-spinner .spinner-ring:nth-child(2) {
+  height: calc(60px / 9 + 1 * 60px / 9);
+  width: calc(60px / 9 + 1 * 60px / 9);
+  animation-delay: calc(50ms * 2);
+}
+
+.fingerprint-spinner .spinner-ring:nth-child(3) {
+  height: calc(60px / 9 + 2 * 60px / 9);
+  width: calc(60px / 9 + 2 * 60px / 9);
+  animation-delay: calc(50ms * 3);
+}
+
+.fingerprint-spinner .spinner-ring:nth-child(4) {
+  height: calc(60px / 9 + 3 * 60px / 9);
+  width: calc(60px / 9 + 3 * 60px / 9);
+  animation-delay: calc(50ms * 4);
+}
+
+.fingerprint-spinner .spinner-ring:nth-child(5) {
+  height: calc(60px / 9 + 4 * 60px / 9);
+  width: calc(60px / 9 + 4 * 60px / 9);
+  animation-delay: calc(50ms * 5);
+}
+
+.fingerprint-spinner .spinner-ring:nth-child(6) {
+  height: calc(60px / 9 + 5 * 60px / 9);
+  width: calc(60px / 9 + 5 * 60px / 9);
+  animation-delay: calc(50ms * 6);
+}
+
+.fingerprint-spinner .spinner-ring:nth-child(7) {
+  height: calc(60px / 9 + 6 * 60px / 9);
+  width: calc(60px / 9 + 6 * 60px / 9);
+  animation-delay: calc(50ms * 7);
+}
+
+.fingerprint-spinner .spinner-ring:nth-child(8) {
+  height: calc(60px / 9 + 7 * 60px / 9);
+  width: calc(60px / 9 + 7 * 60px / 9);
+  animation-delay: calc(50ms * 8);
+}
+
+.fingerprint-spinner .spinner-ring:nth-child(9) {
+  height: calc(60px / 9 + 8 * 60px / 9);
+  width: calc(60px / 9 + 8 * 60px / 9);
+  animation-delay: calc(50ms * 9);
+}
+
+@keyframes fingerprint-spinner-animation {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

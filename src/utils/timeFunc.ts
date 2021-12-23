@@ -1,5 +1,6 @@
 // 标准时间转换成 y-m-d h:m:s
 export function transfromTime(time: string): string {
+  console.log(time);
   const date = new Date(time);
   const y = date.getFullYear();
   let m = `${date.getMonth() + 1}`;

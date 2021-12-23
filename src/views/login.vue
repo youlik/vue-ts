@@ -76,6 +76,10 @@ export default defineComponent({
       password = ref<string>("");
     let isRegister = ref(false);
     function toLogin() {
+      if (!email.value || !password.value) {
+        ElMessage.warning("请填写完整！");
+        return;
+      }
       handleLogin({ email: email.value, password: password.value })
         .then((res: any) => {
           console.log(res);
@@ -128,7 +132,7 @@ export default defineComponent({
   align-items: center;
   position: absolute;
   right: 100px;
-  top: 25%;
+  top: 304px;
 }
 
 .login-control-container {
@@ -137,7 +141,7 @@ export default defineComponent({
   margin-top: 5px;
   position: absolute;
   right: 200px;
-  top: 14%;
+  top: 200px;
   z-index: 99;
   background-image: url("../assets/login.png");
 }

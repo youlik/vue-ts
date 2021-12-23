@@ -9,6 +9,7 @@
       previewOnly
       prettier
     ></md-editor>
+    <process-bar v-if="!content"></process-bar>
   </ViewContainer>
 </template>
 <script lang="ts">
@@ -21,11 +22,13 @@ import MdEditor from "md-editor-v3";
 import { useRoute } from "vue-router";
 import { getBlog } from "@/api/blog";
 import router from "@/router";
+import ProcessBar from "@/components/processBar.vue";
 export default defineComponent({
   name: "blogDetails",
   components: {
     ViewContainer,
     MdEditor,
+    ProcessBar,
   },
   setup(props, context) {
     let content = ref("");
@@ -35,7 +38,7 @@ export default defineComponent({
     console.log(context);
     function getList() {
       getBlog().then((res: any) => {
-        let currentBlog = res.filter((item) => item.id == id)[0];
+        let currentBlog = res.filter((item: any) => item.id == id)[0];
         content.value = currentBlog.context;
         title.value = currentBlog.title;
       });
