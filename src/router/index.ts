@@ -61,6 +61,20 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    path: "/cloudDisk",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/layout.vue"),
+    redirect: "/cloudDisk/index",
+    children: [
+      {
+        path: "index",
+        name: "cloudDisk",
+        meta: { title: "云盘" },
+        component: () => import("../views/cloudDisk/index.vue"),
+      },
+    ],
+  },
+  {
     path: "/message",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/layout.vue"),
