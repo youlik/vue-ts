@@ -72,6 +72,12 @@ const routes: Array<RouteRecordRaw> = [
         meta: { title: "云盘" },
         component: () => import("../views/cloudDisk/index.vue"),
       },
+      {
+        path: "detail",
+        name: "diskDetail",
+        meta: { title: "云盘", hidden: true },
+        component: () => import("../views/cloudDisk/detail.vue"),
+      },
     ],
   },
   {
