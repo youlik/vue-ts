@@ -34,7 +34,7 @@ export default defineComponent({
     let content = ref("");
     let title = ref("");
     let route = useRoute();
-    let id = route.query.blogId;
+    let id = route.query.blogId;  
     console.log(context);
     function getList() {
       getBlog().then((res: any) => {

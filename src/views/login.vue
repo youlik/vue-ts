@@ -84,8 +84,8 @@ export default defineComponent({
         .then((res: any) => {
           console.log(res);
           ElMessage.success("登录成功！");
+          localStorage.setItem("token", res.session["access_token"]);
           router.push({ path: "/home" });
-          localStorage.setItem("token", res["access_token"]);
         })
         .catch((err) => {
           console.log(err);

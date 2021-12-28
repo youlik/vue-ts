@@ -43,4 +43,26 @@ async function upLoadFile(file: any) {
     // alert(error.error_description || error);
   }
 }
-export { getDiskList, downLoadFile, upLoadFile };
+
+async function addDisk(bucketName: string) {
+  try {
+    const { data, error } = await supabase.storage
+      .from("vue-ts-update")
+      .upload(`${bucketName}/.emptyFolderPlaceHolder`, "");
+    return data;
+  } catch (error) {
+    console.error("Error thrown:", error.message);
+    // alert(error.error_description || error);
+  }
+}
+async function addBucket() {
+  try {
+    const { data, error } = await supabase.storage.createBucket("avatars", {
+      public: false,
+    });
+  } catch (error) {
+    console.error("Error thrown:", error.message);
+    // alert(error.error_description || error);
+  }
+}
+export { getDiskList, downLoadFile, upLoadFile, addBucket, addDisk };

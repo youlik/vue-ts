@@ -28,4 +28,6 @@ async function addBlog(blogData: blogDataInterface) {
     // alert(error.error_description || error);
   }
 }
+
+
 export { getBlog, addBlog };

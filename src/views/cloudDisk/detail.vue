@@ -1,6 +1,7 @@
 <template>
   <view-container :list="containerData">
     <template v-slot:tool>
+      <base-button type="primary" label="返回" align="center"></base-button>
       <el-upload
         class="upload-demo"
         action="https://jsonplaceholder.typicode.com/posts/"
@@ -53,7 +54,7 @@ export default defineComponent({
     const containerData: containerProps = { title: "云盘", showToolBar: true };
     function getList() {
       getDiskList(`${route.query.diskName}`).then((res: any) => {
-        res.forEach((item: any, index: number) => index && list.push(item));
+        res.forEach((item: any) => list.push(item));
         list = list.forEach((item: any) => {
           item.size = item.metadata.size;
           item.updated_at = transfromTime(item.updated_at);
