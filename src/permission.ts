@@ -13,7 +13,7 @@ NProgress.configure({ showSpinner: false });
 // 如果是安装 nprogress 进度条，都需要ts处理一下
 // npm install nprogress @types/nprogress -S
 router.beforeEach((to: any, from: any, next: any): void => {
-  const hasToken = true
+  const hasToken = true;
   NProgress.start();
   if (hasToken) {
     next();

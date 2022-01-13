@@ -29,5 +29,4 @@ async function addBlog(blogData: blogDataInterface) {
   }
 }
 
-
 export { getBlog, addBlog };

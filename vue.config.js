@@ -25,7 +25,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "http://localhost:5757",
+        target: "https://c7fut4q5g6hbm7cikq9g.baseapi.memfiredb.com",
         changeOrigin: true,
         pathRewrite: {
           "^/api": "",
