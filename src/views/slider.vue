@@ -83,7 +83,7 @@ export default defineComponent({
   height: 100%;
   box-sizing: border-box;
   padding: 10px 0;
-  @include background_color("background_color1");
+  @include background_color("slider_color");
 }
 
 .slider-item-container {

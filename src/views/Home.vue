@@ -34,7 +34,6 @@ import {
   reactive,
   ref,
   onMounted,
-  createApp,
   getCurrentInstance,
 } from "vue";
 import viewContainer, {
@@ -59,61 +58,29 @@ export default defineComponent({
       { name: "思否", url: "" },
     ]);
     let showDialog = ref(false);
-    let a = reactive({});
     let replaceTheme = function () {
       window.document.documentElement.setAttribute("data-theme", "light");
       localStorage.setItem("theme", "light");
       showDialog.value = false;
     };
-    function mountFunc() {
-      console.log("------");
-    }
+
     onMounted(() => {
       let nowTheme = localStorage.getItem("theme") || "dark";
       window.document.documentElement.setAttribute("data-theme", nowTheme);
     });
-    // const a = useTodoStore();
-    // console.log(a.title);
     const ctx: any = getCurrentInstance();
-    console.log(ctx);
-    let scene, renderer, camera;
-    const defaultMap = {
-      x: 510,
-      y: 128,
-      z: 0,
-    };
-    const setScene = () => {
-      scene = new Scene();
-      renderer = new WebGLRenderer();
-      console.log(innerWidth, innerHeight);
-      renderer.setSize(1000, 800);
-      document.querySelector<any>(".boxs").appendChild(renderer.domElement);
-    };
-    const setCamera = () => {
-      const { x, y, z } = defaultMap;
-      camera = new PerspectiveCamera(60, innerWidth / innerHeight, 1, 1000);
-      camera.position.set(x, y, z);
-    };
-    //初始化所有函数
-    const init = () => {
-      setScene();
-      setCamera();
-    };
-    //用vue钩子函数调用
-    // onMounted(init);
     const containerData: containerProps = { title: "首页", showToolBar: true };
     return {
       menuList,
       replaceTheme,
       showDialog,
       containerData,
-      mountFunc,
     };
   },
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .back-img {
   width: 220px;
   height: 170px;

@@ -42,6 +42,7 @@ export default defineComponent({
   border-radius: 6px;
   cursor: pointer;
   margin: 5px;
+  text-align: center;
 }
 .beat {
   &:hover {

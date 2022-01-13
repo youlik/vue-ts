@@ -63,9 +63,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, getCurrentInstance, reactive } from "vue";
+import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-import { login } from "@/api/https_data";
 import { ElMessage } from "element-plus";
 import { handleLogin, handleRegister } from "@/api/useAuth";
 export default defineComponent({
@@ -76,12 +75,17 @@ export default defineComponent({
     const email = ref<string>(""),
       password = ref<string>("");
     let isRegister = ref(false);
-    function toLogin(params: any) {
+    function toLogin() {
+      if (!email.value || !password.value) {
+        ElMessage.warning("请填写完整！");
+        return;
+      }
       handleLogin({ email: email.value, password: password.value })
-        .then((res) => {
-          console.log("----");
-          router.push({ path: "/home" });
+        .then((res: any) => {
           console.log(res);
+          ElMessage.success("登录成功！");
+          localStorage.setItem("token", res.session["access_token"]);
+          router.push({ path: "/home" });
         })
         .catch((err) => {
           console.log(err);
@@ -128,7 +132,7 @@ export default defineComponent({
   align-items: center;
   position: absolute;
   right: 100px;
-  top: 25%;
+  top: 304px;
 }
 
 .login-control-container {
@@ -137,7 +141,7 @@ export default defineComponent({
   margin-top: 5px;
   position: absolute;
   right: 200px;
-  top: 14%;
+  top: 200px;
   z-index: 99;
   background-image: url("../assets/login.png");
 }

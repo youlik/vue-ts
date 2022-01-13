@@ -8,6 +8,7 @@
     <input
       v-model="currentValue"
       @focus="ishover = true"
+      :style="{ borderColor: ishover ? 'rgba(135, 206, 235, 1)' : '' }"
       @blur="
         ishover = false;
         rules();

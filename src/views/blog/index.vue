@@ -11,6 +11,7 @@
         :key="index"
       ></blog-card>
     </div>
+    <process-bar v-if="!cardList.length"></process-bar>
   </ViewContainer>
 </template>
 
@@ -22,11 +23,13 @@ import ViewContainer, {
 import { getBlog } from "@/api/blog";
 import BlogCard from "./blogCard.vue";
 import { useRouter } from "vue-router";
+import processBar from "@/components/processBar.vue";
 export default defineComponent({
   name: "Index",
   components: {
     ViewContainer,
     BlogCard,
+    processBar,
   },
   setup() {
     const route = useRouter();
@@ -58,8 +61,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .content-container {
   height: 100%;
-  overflow-y: auto;
-  padding: 10px;
+  overflow-y: hidden;
+  // padding: 10px;
   box-sizing: border-box;
   &::-webkit-scrollbar-track-piece {
     background: #d3dce6;

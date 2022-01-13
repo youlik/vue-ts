@@ -10,5 +10,24 @@ async function getBlog() {
     // alert(error.error_description || error);
   }
 }
+interface blogDataInterface {
+  title: string;
+  context: string;
+  id: number;
+  created_at: Date;
+  updated_at: Date;
+  label: number;
+}
 
-export { getBlog };
+async function addBlog(blogData: blogDataInterface) {
+  try {
+    const { data, error } = await supabase.from("blog").insert(blogData);
+    return data;
+  } catch (error) {
+    console.error("Error thrown:", error.message);
+    // alert(error.error_description || error);
+  }
+}
+
+
+export { getBlog, addBlog };

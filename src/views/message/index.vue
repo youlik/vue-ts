@@ -42,6 +42,7 @@
         <base-button label="提交" type="primary" @click="add"></base-button>
       </div>
     </div>
+    <process-bar v-if="!list.length"></process-bar>
   </view-container>
 </template>
 
@@ -54,6 +55,7 @@ import { getMessageList, addMessage } from "@/api/https_data";
 import { transfromTime } from "@/utils/timeFunc";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
 import { getMessage } from "@/api/leaveMessage";
+import ProcessBar from "../../components/processBar.vue";
 interface messageData {
   created_at: string;
   id: string;
@@ -62,7 +64,7 @@ interface messageData {
 }
 export default {
   name: "index",
-  components: { ViewContainer, BaseButton },
+  components: { ViewContainer, BaseButton, ProcessBar },
   setup() {
     const containerData: containerProps = { title: "留言", showToolBar: true };
     const list: any = ref([]);
