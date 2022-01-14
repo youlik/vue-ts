@@ -17,11 +17,11 @@ async function getDiskList(diskName?: string) {
   }
 }
 
-async function downLoadFile() {
+async function downLoadFile(path: string) {
   try {
     const { data, error } = await supabase.storage
       .from("vue-ts-update")
-      .download("电子书/javascript高级程序设计.pdf");
+      .download(path);
     return data;
   } catch (error) {
     console.error("Error thrown:", error.message);
@@ -55,6 +55,16 @@ async function addDisk(bucketName: string) {
     // alert(error.error_description || error);
   }
 }
+
+async function deleteDisk(diskName: string) {
+  try {
+    const { data, error } = await supabase.storage
+      .from("vue-ts-update")
+      .remove([diskName]);
+  } catch (error) {
+    console.error("Error thrown:", error.message);
+  }
+}
 async function addBucket() {
   try {
     const { data, error } = await supabase.storage.createBucket("avatars", {
@@ -65,4 +75,11 @@ async function addBucket() {
     // alert(error.error_description || error);
   }
 }
-export { getDiskList, downLoadFile, upLoadFile, addBucket, addDisk };
+export {
+  getDiskList,
+  downLoadFile,
+  upLoadFile,
+  addBucket,
+  addDisk,
+  deleteDisk,
+};

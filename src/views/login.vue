@@ -67,6 +67,7 @@ import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
 import { handleLogin, handleRegister } from "@/api/useAuth";
+import { addDisk } from "@/api/disk";
 export default defineComponent({
   name: "login",
   components: {},
@@ -86,6 +87,8 @@ export default defineComponent({
           ElMessage.success("登录成功！");
           localStorage.setItem("token", res.session["access_token"]);
           router.push({ path: "/home" });
+          // 用户登录时使用用户的uuid创建文件夹
+          addDisk(res.session.user.id);
         })
         .catch((err) => {
           console.log(err);

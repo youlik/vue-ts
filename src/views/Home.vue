@@ -16,14 +16,10 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  ref,
-  onMounted,
-} from "vue";
+import { ref, onMounted } from "vue";
 import viewContainer, {
   containerProps,
 } from "../baseComponents/viewContainer/index.vue";
-
 
 let showDialog = ref(false);
 let replaceTheme = function () {

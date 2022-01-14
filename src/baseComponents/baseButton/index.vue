@@ -3,34 +3,45 @@
     class="base-button-container"
     :style="styleObj"
     :class="[className, isbeat ? 'beat' : '']"
-    @click="$emit('click')"
+    @click="delay"
   >
     {{ label }}
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, reactive, ref, toRef } from "vue";
-
-export default defineComponent({
-  name: "baseButton",
-  components: {},
-  emits: ["click"],
-  props: {
-    label: String,
+<script lang="ts" setup>
+import {
+  computed,
+  defineComponent,
+  reactive,
+  ref,
+  toRef,
+  defineEmits,
+  defineProps,
+} from "vue";
+const props = defineProps({
+  label: String,
+  type: String,
+  isbeat: Boolean,
+  align: {
     type: String,
-    isbeat: Boolean,
-    align: {
-      type: String,
-      default: "center",
-    },
+    default: "center",
   },
-  setup(props, { emit }) {
-    let className = toRef(props, "type");
-    const styleObj = reactive({ "text-algin": props.type });
-    return { className, styleObj };
+  isDelay: {
+    type: Boolean,
+    default: false,
   },
 });
+const emit = defineEmits(["click"]);
+let className = toRef(props, "type");
+function delay(time?: number) {
+  if (props.isDelay) {
+    console.log(1);
+  } else {
+    emit("click");
+  }
+}
+const styleObj = reactive({ "text-algin": props.type });
 </script>
 
 <style lang="scss" scoped>
