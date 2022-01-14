@@ -29,10 +29,13 @@
         />
       </div>
     </div>
-    <el-dialog v-model="dialogVisible" title="新建文件夹" width="30%">
-      <div style="overflow: hidden">
-        <base-input label="名称" v-model="bucketName"></base-input>
-      </div>
+    <el-dialog
+      v-model="dialogVisible"
+      title="新建文件夹"
+      width="30%"
+      :show-close="false"
+    >
+      <base-input label="名称" v-model="bucketName"></base-input>
       <template #footer>
         <div style="display: flex; justify-content: flex-end">
           <base-button
@@ -81,6 +84,7 @@ function add(bucketName: string) {
   addDisk(`${uuid}/${bucketName}`).then((res) => {
     ElMessage.success("新增成功");
     getList();
+    dialogVisible.value = false;
   });
 }
 function deleteCurrentDisk(diskName: string) {

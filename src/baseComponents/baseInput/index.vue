@@ -74,7 +74,7 @@ export default defineComponent({
   box-sizing: border-box;
   display: flex;
   border: 1px solid gray;
-  overflow: hidden;
+  position: relative;
 }
 
 .input-container {

@@ -65,7 +65,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .blog-card-container {
   width: 100%;
   height: 125px;
