@@ -29,11 +29,11 @@ async function downLoadFile(path: string) {
   }
 }
 
-async function upLoadFile(file: any) {
+async function upLoadFile(path:string,file: any) {
   try {
     const { data, error } = await supabase.storage
       .from("vue-ts-update")
-      .upload(`电子书/${file.name}`, file.raw, {
+      .upload(path, file.raw, {
         cacheControl: "3600",
         upsert: false,
       });

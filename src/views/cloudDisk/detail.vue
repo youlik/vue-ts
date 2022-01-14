@@ -30,20 +30,29 @@
       <base-column label="更新时间" prop="updated_at"></base-column>
       <base-column label="操作" width="150">
         <template v-slot="{ row }">
-          <base-button
+          <div style="display:flex">
+            <base-button
             type="primary"
             label="下载"
             align="center"
             @click="download(row.name)"
           ></base-button>
+          <base-button
+            type="primary"
+            label="删除"
+            align="center"
+            @click="deleteFile(row.name)"
+          ></base-button>
+          </div>
+        
         </template>
       </base-column>
     </base-table>
   </view-container>
 </template>
 
-<script lang="ts">
-import { getDiskList, downLoadFile, upLoadFile } from "@/api/disk";
+<script lang="ts" setup>
+import { getDiskList, downLoadFile, upLoadFile, deleteDisk } from "@/api/disk";
 import { defineComponent, ref, reactive } from "vue";
 import BaseColumn from "@/baseComponents/baseColumn/index.vue";
 import { containerProps } from "@/baseComponents/viewContainer/index.vue";
@@ -51,9 +60,7 @@ import BaseButton from "../../baseComponents/baseButton/index.vue";
 import { transfromTime } from "@/utils/timeFunc";
 import { useRoute, useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
-export default defineComponent({
-  components: { BaseColumn, BaseButton },
-  setup() {
+
     let list: any = reactive([]);
     const route = useRoute();
     const router = useRouter();
@@ -63,10 +70,11 @@ export default defineComponent({
     const containerData: containerProps = { title: "云盘", showToolBar: true };
     function getList() {
       getDiskList(`${uuid}/${route.query.diskName}`).then((res: any) => {
-        res.forEach((item: any, index: number) => index && list.push(item));
-        list = list.forEach((item: any) => {
+        list.length = 0
+        res.forEach((item: any,index:number) => {
           item.size = `${item.metadata.size}b`;
           item.updated_at = transfromTime(item.updated_at);
+          index && list.push(item)
         });
       });
     }
@@ -97,23 +105,19 @@ export default defineComponent({
     }
 
     function upload(file: any) {
-      upLoadFile(file).then((res) => {
-        console.log("res");
+      upLoadFile(`${uuid}/${route.query.diskName}/${file.name}`,file).then((res) => {
+        getList()
       });
+    }
+
+    function deleteFile(filename:string){
+      deleteDisk(`${uuid}/${route.query.diskName}/${filename}`).then(res=>{
+        ElMessage.success('操作成功')
+        getList()
+      })
     }
     getList();
 
-    return {
-      containerData,
-      list,
-      download,
-      downLoadFile,
-      blobData,
-      upload,
-      router,
-    };
-  },
-});
 </script>
 
 <style lang="scss" scoped></style>
