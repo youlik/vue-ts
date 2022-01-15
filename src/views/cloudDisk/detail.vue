@@ -17,11 +17,6 @@
         @change="(file: any) => upload(file)"
       >
         <base-button type="primary" label="上传" align="center"></base-button>
-        <!-- <template #tip>
-          <div class="el-upload__tip">
-            jpg/png files with a size less than 500kb
-          </div>
-        </template> -->
       </el-upload>
     </template>
     <base-table :list="list">

@@ -17,7 +17,7 @@
             "
           >
             <span>第{{ index + 1 }}楼</span
-            ><span>{{ transfromTime(item.updated_at) }}</span>
+            ><span>{{ transfromTime(item.created_at) }}</span>
           </div>
         </div>
       </div>
@@ -46,26 +46,24 @@
   </view-container>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import ViewContainer, {
   containerProps,
 } from "@/baseComponents/viewContainer/index.vue";
 import { reactive, ref } from "vue";
-import { getMessageList, addMessage } from "@/api/https_data";
+import { getMessageList } from "@/api/https_data";
 import { transfromTime } from "@/utils/timeFunc";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
-import { getMessage } from "@/api/leaveMessage";
+import { getMessage,addMessage } from "@/api/leaveMessage";
 import ProcessBar from "../../components/processBar.vue";
 interface messageData {
   created_at: string;
   id: string;
   context: string;
-  user_id: string;
+  uuid: string;
 }
-export default {
-  name: "index",
-  components: { ViewContainer, BaseButton, ProcessBar },
-  setup() {
+let uuid = JSON.parse(localStorage.getItem("supabase.auth.token") as string)
+  .currentSession.user.id;
     const containerData: containerProps = { title: "留言", showToolBar: true };
     const list: any = ref([]);
     let content = ref("");
@@ -83,22 +81,12 @@ export default {
     }
     function add() {
       console.log(new Date());
-      addMessage({ content: content.value }).then((res) => {
+      addMessage({ context: content.value,uuid,id:1,created_at:new Date() }).then((res) => {
         getList();
       });
     }
     getList();
-    return {
-      containerData,
-      list,
-      content,
-      pageInfo,
-      changePage,
-      add,
-      transfromTime,
-    };
-  },
-};
+
 </script>
 
 <style lang="scss" scoped>

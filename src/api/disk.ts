@@ -29,7 +29,7 @@ async function downLoadFile(path: string) {
   }
 }
 
-async function upLoadFile(path:string,file: any) {
+async function upLoadFile(path: string, file: any) {
   try {
     const { data, error } = await supabase.storage
       .from("vue-ts-update")

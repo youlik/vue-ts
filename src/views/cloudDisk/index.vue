@@ -76,7 +76,7 @@ function routerTo(diskName: string) {
 function getList() {
   getDiskList(uuid).then((res: any) => {
     list.length = 0;
-    res.shift();
+    res && res.shift();
     list.push(...res);
   });
 }

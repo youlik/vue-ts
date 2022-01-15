@@ -12,7 +12,7 @@
     <process-bar v-if="!content"></process-bar>
   </ViewContainer>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent, reactive, ref } from "vue";
 import "md-editor-v3/lib/style.css";
 import ViewContainer, {
@@ -23,23 +23,15 @@ import { useRoute } from "vue-router";
 import { getBlog } from "@/api/blog";
 import router from "@/router";
 import ProcessBar from "@/components/processBar.vue";
-export default defineComponent({
-  name: "blogDetails",
-  components: {
-    ViewContainer,
-    MdEditor,
-    ProcessBar,
-  },
-  setup(props, context) {
+
     let content = ref("");
     let title = ref("");
     let route = useRoute();
     let id = route.query.blogId;
-    console.log(context);
     function getList() {
       getBlog().then((res: any) => {
-        let currentBlog = res.filter((item: any) => item.id == id)[0];
-        content.value = currentBlog.context;
+        let currentBlog = res[0];
+        content.value = currentBlog?.content;
         title.value = currentBlog.title;
       });
     }
@@ -51,13 +43,7 @@ export default defineComponent({
     function back() {
       router.back();
     }
-    return {
-      content,
-      containerData,
-      back,
-    };
-  },
-});
+
 </script>
 
 <style lang="scss">

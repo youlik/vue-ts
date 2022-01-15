@@ -38,7 +38,7 @@ export default defineComponent({
         created_at: new Date(),
         updated_at: new Date(),
         title: title.value,
-        context: content.value,
+        content: content.value,
         label: 1,
       });
     }

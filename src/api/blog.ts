@@ -12,7 +12,7 @@ async function getBlog() {
 }
 interface blogDataInterface {
   title: string;
-  context: string;
+  content: string;
   id: number;
   created_at: Date;
   updated_at: Date;
