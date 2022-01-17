@@ -31,7 +31,10 @@ export default defineComponent({
   components: {},
   props: {
     label: String,
-    type: String,
+    type: {
+      type: String,
+      default: "text",
+    },
     modelValue: String,
     reg: {
       type: RegExp,

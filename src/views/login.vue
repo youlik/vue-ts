@@ -27,7 +27,7 @@
       <base-input
         label="密码"
         v-model="password"
-        type="passward"
+        type="password"
         @click="isPassword = true"
         @blur="isPassword = false"
       ></base-input>
@@ -67,7 +67,7 @@ import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
 import { handleLogin, handleRegister } from "@/api/useAuth";
-import { addDisk } from "@/api/disk";
+import { addDisk, getDiskList } from "@/api/disk";
 export default defineComponent({
   name: "login",
   components: {},
@@ -76,6 +76,7 @@ export default defineComponent({
     const email = ref<string>(""),
       password = ref<string>("");
     let isRegister = ref(false);
+    let uuid = "";
     function toLogin() {
       if (!email.value || !password.value) {
         ElMessage.warning("请填写完整！");
@@ -84,18 +85,29 @@ export default defineComponent({
       handleLogin({ email: email.value, password: password.value })
         .then((res: any) => {
           console.log(res);
-          ElMessage.success("登录成功！");
-          localStorage.setItem("token", res.session["access_token"]);
-          router.push({ path: "/home" });
+          if (res.session) {
+            ElMessage.success("登录成功！");
+            localStorage.setItem("token", res.session["access_token"]);
+            router.push({ path: "/home" });
+          }
+
           // 用户登录时使用用户的uuid创建文件夹
-          addDisk(res.session.user.id);
         })
         .catch((err) => {
-          console.log(err);
+          ElMessage.error("登录失败！");
         });
     }
     function confirm(): void {
-      handleRegister({ email: email.value, password: password.value });
+      handleRegister({ email: email.value, password: password.value }).then(
+        (res: any) => {
+          console.log(res);
+          let { session, user } = res;
+          ElMessage.success("注册成功！");
+          localStorage.setItem("token", res.session["access_token"]);
+          router.push({ path: "/home" });
+          addDisk(user.id);
+        }
+      );
     }
     function register() {
       isRegister.value = true;
