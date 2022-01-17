@@ -54,7 +54,7 @@ import { reactive, ref } from "vue";
 import { getMessageList } from "@/api/https_data";
 import { transfromTime } from "@/utils/timeFunc";
 import BaseButton from "@/baseComponents/baseButton/index.vue";
-import { getMessage,addMessage } from "@/api/leaveMessage";
+import { getMessage, addMessage } from "@/api/leaveMessage";
 import ProcessBar from "../../components/processBar.vue";
 interface messageData {
   created_at: string;
@@ -64,29 +64,32 @@ interface messageData {
 }
 let uuid = JSON.parse(localStorage.getItem("supabase.auth.token") as string)
   .currentSession.user.id;
-    const containerData: containerProps = { title: "留言", showToolBar: true };
-    const list: any = ref([]);
-    let content = ref("");
-    const pageInfo = reactive({ page: 1, size: 10, total: 0 });
-    function getList() {
-      getMessage().then((res) => {
-        console.log(list.value);
-        list.value = res;
-      });
-    }
-    function changePage(page: any) {
-      console.log(page);
-      pageInfo.page = page;
-      getList();
-    }
-    function add() {
-      console.log(new Date());
-      addMessage({ context: content.value,uuid,id:1,created_at:new Date() }).then((res) => {
-        getList();
-      });
-    }
+const containerData: containerProps = { title: "留言", showToolBar: true };
+const list: any = ref([]);
+let content = ref("");
+const pageInfo = reactive({ page: 1, size: 10, total: 0 });
+function getList() {
+  getMessage().then((res) => {
+    console.log(list.value);
+    list.value = res;
+  });
+}
+function changePage(page: any) {
+  console.log(page);
+  pageInfo.page = page;
+  getList();
+}
+function add() {
+  console.log(new Date());
+  addMessage({
+    context: content.value,
+    uuid,
+    created_at: new Date(),
+  }).then((res) => {
     getList();
-
+  });
+}
+getList();
 </script>
 
 <style lang="scss" scoped>

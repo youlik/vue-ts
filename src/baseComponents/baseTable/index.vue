@@ -1,6 +1,6 @@
 <template>
   <div class="el-table-container">
-    <el-table :data="list" height="100%" border>
+    <el-table :data="list" height="100%" v-on="$attrs" border>
       <slot></slot>
     </el-table>
   </div>

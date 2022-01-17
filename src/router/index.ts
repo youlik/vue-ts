@@ -78,6 +78,12 @@ const routes: Array<RouteRecordRaw> = [
         meta: { title: "云盘", hidden: true },
         component: () => import("../views/cloudDisk/detail.vue"),
       },
+      {
+        path: "preview",
+        name: "preview",
+        meta: { title: "预览", hidden: true },
+        component: () => import("../views/cloudDisk/preview.vue"),
+      },
     ],
   },
   {

@@ -13,7 +13,7 @@
         "
       >
         <div>{{ list.title }}</div>
-        <scrollViews></scrollViews>
+        <scrollViews v-if="showScroll"></scrollViews>
       </div>
       <div
         style="
@@ -51,6 +51,10 @@ export default defineComponent({
     list: {
       type: Object as PropType<containerProps>,
       required: true,
+    },
+    showScroll: {
+      type: Boolean,
+      default: true,
     },
   },
 });

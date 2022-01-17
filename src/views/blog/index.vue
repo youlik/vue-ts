@@ -1,7 +1,7 @@
 <template>
   <ViewContainer :list="containerData">
     <template v-slot:tool>
-      <BaseButton label="添加" type="primary" @click="addBlog"></BaseButton>
+      <!-- <BaseButton label="添加" type="primary" @click="addBlog"></BaseButton> -->
     </template>
     <div class="content-container">
       <blog-card
