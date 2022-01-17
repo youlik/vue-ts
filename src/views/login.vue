@@ -132,7 +132,7 @@ export default defineComponent({
   height: 100vh;
   margin: 0 auto;
   position: relative;
-  background-image: url("../assets/backgroundImage.jpg");
+  background-image: url("https://s4.ax1x.com/2022/01/17/7au5lj.jpg");
 }
 .login-dialog {
   width: 420px;
